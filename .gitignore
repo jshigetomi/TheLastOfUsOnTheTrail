@@ -1,4 +1,4 @@
-# IntelliJ config files
+# IntelliJ metadata files
 .idea/*
 !.idea/artifacts/
 !.idea/libraries/
