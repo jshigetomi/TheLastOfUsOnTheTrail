@@ -1,4 +1,4 @@
-package com.lastofus.player;
+package src.com.lastofus.player;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package com.main;
+package src.com.lastofus.client;
 
 import static org.junit.Assert.*;
 

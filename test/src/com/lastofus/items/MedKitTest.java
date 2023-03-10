@@ -1,4 +1,4 @@
-package com.lastofus.items;
+package src.com.lastofus.items;
 
 import static org.junit.Assert.*;
 
