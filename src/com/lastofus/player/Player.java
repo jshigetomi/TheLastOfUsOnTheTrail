@@ -1,8 +1,5 @@
 package com.lastofus.player;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 class Player {
 
     private String name;
@@ -10,6 +7,7 @@ class Player {
     private int attack;
     private int eat;
     private int items;
+    private Backpack jansport = null;
     boolean isAlive;
 
     public Player(String name, int health, int attack) {

@@ -1,6 +1,4 @@
-package src.com.lastofus.client;
-
-import com.lastofus.appcontroller.LastOfUsAppController;
+package com.lastofus.client;
 
 class Main {
 
