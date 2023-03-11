@@ -1,15 +1,15 @@
 package com.lastofus.player;
 
-
 public class Player {
 
     private String name;
     private int health;
-    private int attack;
-    private int eat;
+    public int attack;
+    public int eat;
     private int items;
     private Backpack jansport = null;
     boolean isAlive;
+
 
     public Player(String name, int health, int attack) {
         this.name = name;
@@ -41,7 +41,16 @@ public class Player {
         this.items = items;
     }
 
-    public enum backpack {
-        GUN, MEDKIT, STEAK;
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                ", health=" + health +
+                ", attack=" + attack +
+                ", eat=" + eat +
+                ", items=" + items +
+                ", jansport=" + jansport +
+                ", isAlive=" + isAlive +
+                '}';
     }
 }
