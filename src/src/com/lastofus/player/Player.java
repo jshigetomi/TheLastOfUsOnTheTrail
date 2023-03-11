@@ -42,4 +42,8 @@ class Player {
         this.items = items;
     }
 
+    public enum backpack {
+        GUN, MEDKIT, STEAK;
+    }
+
 }
