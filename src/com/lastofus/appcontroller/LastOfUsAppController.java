@@ -11,8 +11,6 @@ public class LastOfUsAppController {
         showOptionsList(); //1, 2, 3, 4 eventList
         int decision = promptForDecision();
         int backpackChoice = promptForBackpackChoice();
-
-
     }
 
     private int promptForBackpackChoice() {
@@ -37,7 +35,7 @@ public class LastOfUsAppController {
         //clear console
     }
 
-    private int promptForDecision() {
+    private int promptForDecision() { //Prompts the user for an action
         int decision = 0;
 
         boolean validInput = false; //assume its wrong
