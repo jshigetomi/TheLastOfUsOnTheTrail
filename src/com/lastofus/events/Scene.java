@@ -1,20 +1,42 @@
 package com.lastofus.events;
 
-import com.apps.util.Prompter;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.stream.Collectors;
+import com.apps.util.Console;
 
-import java.util.Locale;
-import java.util.Scanner;
 
 class Scene {
-    private String message;
+    private String path = "scenes/Scenes.txt";
+    private List<String> allLines;
+    private String prompt;
+    private String[] choices;
 
-    Scene(String newMessage) {
-        this.message = newMessage;
+    public Scene(String sceneNumber) {
+        try {
+            String scene = "S" + sceneNumber;
+            String choices = "C" + sceneNumber;
+
+            allLines = Files.lines(Path.of(path))
+                    .filter(line -> line.startsWith(scene) || line.startsWith(choices))
+                    .limit(5)
+                    .map(line -> line.substring(4))
+                    .collect(Collectors.toList());
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void begin() {
-        Prompter prompter = new Prompter(new Scanner(System.in));
-        String input = prompter.prompt("Enter a letter: ", "A|B|C|D","\nEnter valid letter!\n");
-        System.out.println(input);
+        // CHECK if allLines is null
+        if(allLines.isEmpty()) {
+            System.out.println("Error: allLines is null");
+            return;
+        }
+        // print each line in allLines
+        allLines.forEach(System.out::println);
     }
 }
