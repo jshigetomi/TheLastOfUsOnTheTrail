@@ -1,6 +1,7 @@
 package com.lastofus.player;
 
-class Player {
+
+public class Player {
 
     private String name;
     private int health;
@@ -43,5 +44,4 @@ class Player {
     public enum backpack {
         GUN, MEDKIT, STEAK;
     }
-
 }
