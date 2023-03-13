@@ -57,6 +57,4 @@ public class Player {
                 ", isAlive=" + isAlive +
                 '}';
     }
-
-
 }

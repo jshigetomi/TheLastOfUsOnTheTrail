@@ -32,7 +32,7 @@ public class Battle extends Event{
         // play the first scene and prompt the user for input
 
         while (player.getHealth() > 0 && !sceneList.isEmpty()) {
-            Console.clear(); // TODO: Ask Jay why this wont clear the screen
+            Console.clear();
 
             /*
              * Add art here
@@ -64,8 +64,10 @@ public class Battle extends Event{
                     break;
                 case 4:
                     int choice = appController.promptForBackpackChoice(player);
-                    if(player.getBackpack().getItem(choice - 1) instanceof Gun ) {
-                        branchGunLoop();
+                    if(!player.getBackpack().getItems().isEmpty()) {
+                        if (player.getBackpack().getItem(choice - 1) instanceof Gun) {
+                            branchGunLoop();
+                        }
                     }
                     break;
             }

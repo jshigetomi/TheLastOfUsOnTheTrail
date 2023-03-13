@@ -15,6 +15,7 @@ public class Highway extends Event {
     private final LastOfUsAppController appController = new LastOfUsAppController();
     private final Player player;
     private final List<Scene> sceneList = new ArrayList<>();
+    private boolean quit = false;
 
     public Highway(Player player) {
         super();
@@ -28,7 +29,7 @@ public class Highway extends Event {
 
     @Override
     public void begin() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+        while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
             // Enter highway
             sceneList.get(0).begin();
@@ -47,6 +48,7 @@ public class Highway extends Event {
                     break;
                 case 4:
                     System.out.println("Feeling brave? You went out in the open");
+                    quit = true;
                     break;
             }
         }
@@ -54,7 +56,7 @@ public class Highway extends Event {
 
     // acquire steak branch
     private void lambLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+        while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
             // kill lamb for steak
             sceneList.get(1).begin();
@@ -65,6 +67,7 @@ public class Highway extends Event {
                 case 1:
                     player.getBackpack().addItem(new Steak(1));
                     System.out.println("You acquired a steak into your backpack.");
+                    Console.pause(1000); // temp fix
                     lambLoop();
                     break;
                 case 2:
@@ -74,6 +77,7 @@ public class Highway extends Event {
                 case 3:
                     System.out.println("STAY ALERT: You have " + player.getBackpack().viewLoad()
                             + "  in your backpack.");
+                    Console.pause(1000); // temp fix
                     lambLoop();
                     break;
                 case 4:
@@ -85,7 +89,7 @@ public class Highway extends Event {
 
     // find gun branch
     private void sheriffLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+        while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
             // search vehicle and find gun
             sceneList.get(2).begin();
@@ -96,6 +100,7 @@ public class Highway extends Event {
                 case 1:
                     player.getBackpack().addItem(new Gun(1));
                     System.out.println("Congratulations, you found a gun and placed it into your backpack.");
+                    Console.pause(1000); // temp fix
                     begin();
                     break;
                 case 2:
@@ -105,6 +110,7 @@ public class Highway extends Event {
                 case 3:
                     System.out.println("STAY ALERT: You have " + player.getBackpack().viewLoad()
                             + "  in your backpack.");
+                    Console.pause(1000); // temp fix
                     sheriffLoop();
                     break;
                 case 4:
@@ -116,7 +122,7 @@ public class Highway extends Event {
 
     // find medkit branch
     private void ambulanceLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+        while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
             // search vehicle and find medkit
             sceneList.get(3).begin();
@@ -127,6 +133,7 @@ public class Highway extends Event {
                 case 1:
                     player.getBackpack().addItem(new MedKit(1));
                     System.out.println("Excellent find! You added a medical kit your backpack.");
+                    Console.pause(1000); // temp fix
                     begin();
                     break;
                 case 2:
@@ -136,6 +143,7 @@ public class Highway extends Event {
                 case 3:
                     System.out.println("STAY ALERT: You have " + player.getBackpack().viewLoad()
                             + "  in your backpack.");
+                    Console.pause(1000); // temp fix
                     ambulanceLoop();
                     break;
                 case 4:
