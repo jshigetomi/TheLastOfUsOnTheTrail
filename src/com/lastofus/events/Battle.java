@@ -16,13 +16,13 @@ public class Battle extends Event{
     public Battle(Player currentPlayer) {
         super();
         this.player = currentPlayer;
-        sceneList.add(new Scene("1"));
-        sceneList.add(new Scene("2"));
-        sceneList.add(new Scene("3"));
-        sceneList.add(new Scene("4"));
-        sceneList.add(new Scene("5"));
-        sceneList.add(new Scene("6"));
-        sceneList.add(new Scene("7"));
+        sceneList.add(new Scene("Battle", "1"));
+        sceneList.add(new Scene("Battle","2"));
+        sceneList.add(new Scene("Battle","3"));
+        sceneList.add(new Scene("Battle","4"));
+        sceneList.add(new Scene("Battle","5"));
+        sceneList.add(new Scene("Battle","6"));
+        sceneList.add(new Scene("Battle","7"));
     }
 
     @Override

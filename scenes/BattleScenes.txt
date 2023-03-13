@@ -41,3 +41,7 @@ C7: 1. shoot the zombie
 C7: 2. run
 C7: 3. hide
 C7: 4. check your backpack
+
+Forrest Scene:
+
+S8: You are in the forrest. You see a tree. What do you do?

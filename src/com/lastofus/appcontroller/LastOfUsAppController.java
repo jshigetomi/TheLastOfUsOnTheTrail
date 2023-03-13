@@ -1,6 +1,7 @@
 package com.lastofus.appcontroller;
 
 import com.lastofus.events.Battle;
+import com.lastofus.events.Forest;
 import com.lastofus.items.Gun;
 import com.lastofus.items.MedKit;
 import com.lastofus.items.Steak;
@@ -29,7 +30,9 @@ public class LastOfUsAppController {
         welcome(); //title screen
         player1.wearBackpack(jansport); // give player a backpack
         eventList.add(new Battle(player1));
+        //eventList.add(new Forest(player1));
         eventList.get(0).begin();
+        //eventList.get(1).begin();
     }
 
     public int promptForBackpackChoice(Player player1) {
