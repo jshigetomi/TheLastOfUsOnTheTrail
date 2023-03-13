@@ -95,7 +95,6 @@ public class Forest extends Event{
                     break;
                 case 4:
                     //curl up and die
-                    end();
                     break;
             }
         }
