@@ -12,7 +12,7 @@ public class Forest extends Event{
     private Player player;
     private final List<Scene> sceneList = new ArrayList<>();
     private final Zombie zombie = new Zombie();
-    private final Battle battle = new Battle(player); //I removed final here
+  //I removed final here
     private final Highway highway = new Highway(player);
 
     public Forest(Player currentPlayer) {
@@ -57,7 +57,8 @@ public class Forest extends Event{
                     break;
                 case 3:
                     // keep running into the abyss
-                    battle.begin();
+                    Battle battle = new Battle(player);
+                    battle.begin(); //keep running
                     break;
                 case 4:
                     //hide in a tree
@@ -82,11 +83,13 @@ public class Forest extends Event{
                     //investigate
                     player.setHealth(player.getHealth() - 10);
                     System.out.println("You have ran into a zombie");
+                    Battle battle = new Battle(player);
                     battle.begin();
                     break;
                 case 2:
                     //run away as fast as you can
                     System.out.println("Run forest run...");
+                    battle = new Battle(player);
                     battle.begin();
                     break;
                 case 3:
@@ -119,6 +122,7 @@ public class Forest extends Event{
                 case 2:
                     //run
                     System.out.println("Run forest run...");
+                    Battle battle = new Battle(player);
                     battle.begin();
                     break;
                 case 3:
@@ -154,6 +158,7 @@ public class Forest extends Event{
                     break;
                 case 2:
                     //fight and live another day
+                    Battle battle = new Battle(player);
                     battle.begin();
                     break;
                 case 3:

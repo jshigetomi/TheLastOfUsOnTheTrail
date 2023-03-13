@@ -38,8 +38,9 @@ public class LastOfUsAppController {
         jansport = new Backpack();
 //        jansport.addItem(steak);
 //        jansport.addItem(medKit);
-//        jansport.addItem(gun);
+        jansport.addItem(gun);
         player1.wearBackpack(jansport);
+
     }
 
     public void loadEvents() {
