@@ -1,10 +1,16 @@
 package com.lastofus.items;
 
-public class MedKit {
+import com.lastofus.player.Item;
+
+public class MedKit extends Item {
 
     private int charges;
-    public  int damage;
+    public  int damage = 50;
     public int use;
+
+    public MedKit(int charges) {
+        this.charges = charges;
+    }
 
     public int getDamage() {
         return damage;
@@ -20,5 +26,10 @@ public class MedKit {
 
     public void setUse(int use) {
         this.use = use;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
     }
 }

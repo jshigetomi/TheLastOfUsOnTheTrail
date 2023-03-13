@@ -4,7 +4,7 @@ public class Player {
 
     private String name;
     private int health = 100;
-    public int attack = 100;
+    public int attack = 10;
     public int eat;
     private int items;
     private Backpack jansport = null;
@@ -16,6 +16,16 @@ public class Player {
         this.health = health;
         this.attack = attack;
     }
+
+    public void wearBackpack (Backpack pack) {
+        jansport = pack;
+    }
+
+    public Backpack getBackpack() {
+        return jansport;
+    }
+
+
 
     public String getName() {
         return name;
@@ -52,5 +62,13 @@ public class Player {
                 ", jansport=" + jansport +
                 ", isAlive=" + isAlive +
                 '}';
+    }
+
+    public void setAttack(int value) {
+        this.attack = value;
+    }
+
+    public int getAttack() {
+        return attack;
     }
 }
