@@ -7,8 +7,7 @@ import com.lastofus.player.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Battle
-extends Event{
+public class Battle extends Event{
     private final LastOfUsAppController appController = new LastOfUsAppController();
     private final Player player;
     private final List<Scene> sceneList = new ArrayList<>();

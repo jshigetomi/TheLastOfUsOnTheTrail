@@ -2,6 +2,7 @@ package com.lastofus.appcontroller;
 
 import com.lastofus.events.Event;
 import com.lastofus.events.Battle;
+import com.lastofus.events.Highway;
 import com.lastofus.items.Gun;
 import com.lastofus.items.MedKit;
 import com.lastofus.items.Steak;
@@ -22,7 +23,7 @@ public class LastOfUsAppController {
     private final MedKit medKit = new MedKit(1);
     private final Gun gun = new Gun(1);
 
-    private final List<Battle> eventList = new ArrayList<>();
+    private final List<Event> eventList = new ArrayList<>();
 
 
     public void execute() {
@@ -44,6 +45,7 @@ public class LastOfUsAppController {
     }
 
     public void loadEvents() {
+        eventList.add(new Highway(player1));
         eventList.add(new Battle(player1));
     }
 
