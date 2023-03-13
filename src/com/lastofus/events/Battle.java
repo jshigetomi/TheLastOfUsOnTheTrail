@@ -2,6 +2,7 @@ package com.lastofus.events;
 
 import com.apps.util.Console;
 import com.lastofus.appcontroller.LastOfUsAppController;
+import com.lastofus.items.Gun;
 import com.lastofus.player.Player;
 
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ extends Event{
                     break;
                 case 4:
                     int choice = appController.promptForBackpackChoice(player);
-                    if(choice == 3) {
+                    if(player.getBackpack().getItem(choice - 1) instanceof Gun ) {
                         branchGunLoop();
                     }
                     break;
