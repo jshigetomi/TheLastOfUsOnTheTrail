@@ -1,10 +1,16 @@
 package com.lastofus.items;
 
-public class Gun {
+import com.lastofus.player.Item;
+
+public class Gun extends Item {
 
     private int charges;
     public int damage;
     public int use;
+
+    public Gun(int charges) {
+        this.charges = charges;
+    }
 
     public int getDamage() {
         return damage;
@@ -20,5 +26,10 @@ public class Gun {
 
     public void setUse(int use) {
         this.use = use;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
     }
 }

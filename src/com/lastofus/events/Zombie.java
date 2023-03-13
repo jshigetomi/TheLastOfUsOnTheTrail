@@ -4,27 +4,28 @@ class Zombie {
 
     private int zHealth = 75;
     private int zAttack = 25;
-    public int die;
-    public int use;
 
-    public Zombie(int die, int use) {
-        this.die = die;
-        this.use = use;
+    public Zombie() {
     }
 
-    public int getDie() {
-        return die;
+    public Zombie(int health, int attack) {
+        this();
+        this.zAttack = attack;
+        this.zHealth = health;
     }
 
-    public void setDie(int die) {
-        this.die = die;
+    public void die() { zHealth = 0; }
+
+    public int getZAttack() {
+        return this.zAttack;
     }
 
-    public int getUse() {
-        return use;
+    public int getZHealth() {
+        return this.zHealth;
     }
 
-    public void setUse(int use) {
-        this.use = use;
+    public int setZHealth(int health) {
+        return this.zHealth = health;
     }
+
 }

@@ -27,7 +27,7 @@ C4: 4. scream
 S5: You try to hide but the zombie hears you breathing and comes closer
 C5: 1. fight
 C5: 2. run
-C5: 3. hold your breathe
+C5: 3. hold your breath
 C5: 4. scream
 
 S6: You run away but when you look back the zombie is following you...
@@ -35,3 +35,9 @@ C6: 1. punch it
 C6: 2. keep running
 C6: 3. hide
 C6: 5. check your backpack
+
+S7: You spotted a zombie! The zombie doesn't seem to notice you. What do you do?
+C7: 1. shoot the zombie
+C7: 2. run
+C7: 3. hide
+C7: 4. check your backpack
