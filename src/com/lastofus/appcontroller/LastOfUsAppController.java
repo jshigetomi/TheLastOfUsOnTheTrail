@@ -1,13 +1,12 @@
 package com.lastofus.appcontroller;
 
+import com.lastofus.events.Event;
 import com.lastofus.events.Battle;
-import com.lastofus.events.Forest;
 import com.lastofus.items.Gun;
 import com.lastofus.items.MedKit;
 import com.lastofus.items.Steak;
 import com.lastofus.player.Backpack;
 import com.lastofus.player.Player;
-import jdk.jfr.Event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,22 +16,35 @@ import java.util.Scanner;
 public class LastOfUsAppController {
     private final Scanner scanner = new Scanner(System.in);
     Random random = new Random(); //Random attack on player
-    private final Player player1 = new Player("Player1", 100, 100);
-    private final Backpack jansport = new Backpack();
+    private Player player1;
+    private Backpack jansport;
     private final Steak steak = new Steak(1);
     private final MedKit medKit = new MedKit(1);
     private final Gun gun = new Gun(1);
 
-    private List<Battle> eventList = new ArrayList<>(); // TODO: Ask Jay why this wont work with Event
+    private final List<Battle> eventList = new ArrayList<>();
 
 
     public void execute() {
         welcome(); //title screen
-        player1.wearBackpack(jansport); // give player a backpack
+        initializePlayer(); // initialize player
+        loadEvents(); // add events to eventList
+        for(Event event: eventList) {
+            event.begin();
+        }
+    }
+
+    public void initializePlayer() {
+        player1 = new Player("Joel", 100, 50);
+        jansport = new Backpack();
+//        jansport.addItem(steak);
+//        jansport.addItem(medKit);
+//        jansport.addItem(gun);
+        player1.wearBackpack(jansport);
+    }
+
+    public void loadEvents() {
         eventList.add(new Battle(player1));
-        //eventList.add(new Forest(player1));
-        eventList.get(0).begin();
-        //eventList.get(1).begin();
     }
 
     public int promptForBackpackChoice(Player player1) {
@@ -40,31 +52,35 @@ public class LastOfUsAppController {
 
         boolean validInput = false; //assume its wrong
         while (!validInput) {
-            System.out.print("You have tools: " );
             System.out.println(player1.getBackpack().viewLoad());
+            if(player1.getBackpack().getLoad() == 0) {
+                break;
+            }
             String input = scanner.nextLine().trim(); //BLOCKS for input
             if (input.matches("\\d{1}")) { //any digit one
                 backpackChoice = Integer.parseInt(input);
                 if (1 <= backpackChoice && backpackChoice <= player1.getBackpack().getLoad()) {
                     validInput = true;
-
-                    if (backpackChoice == 2) {
-                        steak.setUse(steak.getUse() - 1);
-                        player1.setHealth(player1.getHealth() + 50);
-                        System.out.println("You ate the steak and gained 50 health");
-                    } else if (backpackChoice == 1) {
-                        medKit.setUse(medKit.getUse() - 1);
-                        player1.setHealth(player1.getHealth() + 100);
-                        System.out.println("You used the MedKit and gained 50 health");
-                    } else {
-                        gun.setUse(gun.getUse() - 1);
-                        player1.setAttack(player1.getAttack() + 50);
-                        System.out.println("You equipped the gun and gained 50 attack");
+                    switch (backpackChoice) {
+                        case 1:
+                            player1.getBackpack().getItems().get(0).use(player1);
+                            break;
+                        case 2:
+                            player1.getBackpack().getItems().get(1).use(player1);
+                            break;
+                        case 3:
+                            player1.getBackpack().getItems().get(2).use(player1);
+                            break;
+                        case 4:
+                            player1.getBackpack().getItems().get(3).use(player1);
+                            break;
+                        case 5:
+                            player1.getBackpack().getItems().get(4).use(player1);
+                            break;
                     }
                 }
             }
         }
-
         return backpackChoice;
         //clear console
     }
@@ -79,15 +95,6 @@ public class LastOfUsAppController {
                 decision = Integer.parseInt(input); //now you can safely parseint() without it blowing
                 if (1 <= decision && decision <= 4) {
                     validInput = true;
-//                    if (decision == 1) {
-//                        //TODO come back to this
-//                    } else if (decision == 2) {
-//                        promptForBackpackChoice(); // TODO make it pull out steak
-//                    } else if (decision == 3) {
-//                        System.out.println(); //TODO Raise health by 10
-//                    } else {
-//                       //zombie.setHealth()?? TODO: lower zombies health by a random int
-//                    }
                 }
             }
         }
@@ -104,5 +111,4 @@ public class LastOfUsAppController {
         System.out.println("--------A Zombie has appeared:------");
         System.out.println("--------A Zombie has appeared:------");
     }
-
 }

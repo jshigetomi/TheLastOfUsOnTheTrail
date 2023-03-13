@@ -12,15 +12,12 @@ import java.util.List;
 public class Backpack {
 
     private static final int MAX_SIZE = 5;
-    private List<Item> items = new ArrayList<>();
+    private final List<Item> items = new ArrayList<>();
     public int load;
-    public int unload;
+
 
     public Backpack() {
-        items.add(new MedKit(1));
-        items.add(new Steak(1));
-        items.add(new Gun(1));
-        load = items.size();
+        load = 0;
     }
 
     public Backpack(Item... item) {
@@ -32,16 +29,15 @@ public class Backpack {
         return load;
     }
 
-    public void setLoad(int load) {
-        this.load = load;
+    public void addItem(Item item) {
+        if (items.size() < MAX_SIZE) {
+            items.add(item);
+            load++;
+        }
     }
 
-    public int getUnload() {
-        return unload;
-    }
-
-    public void setUnload(int unload) {
-        this.unload = unload;
+    public List<Item> getItems() {
+        return Collections.unmodifiableList(items);
     }
 
     public String viewLoad() {

@@ -1,6 +1,7 @@
 package com.lastofus.items;
 
 import com.lastofus.player.Item;
+import com.lastofus.player.Player;
 
 public class MedKit extends Item {
 
@@ -26,6 +27,16 @@ public class MedKit extends Item {
 
     public void setUse(int use) {
         this.use = use;
+    }
+
+    public void use(Player player) {
+        if(charges > 0) {
+            player.setHealth(player.getHealth() + 100);
+            System.out.println("You used a medkit and gained 100 health");
+            charges--;
+        } else {
+            System.out.println("You have no more charges");
+        }
     }
 
     @Override

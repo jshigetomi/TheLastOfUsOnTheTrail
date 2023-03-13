@@ -1,6 +1,7 @@
 package com.lastofus.items;
 
 import com.lastofus.player.Item;
+import com.lastofus.player.Player;
 
 public class Steak extends Item {
 
@@ -18,6 +19,16 @@ public class Steak extends Item {
 
     public void setDamage(int damage) {
         this.damage = damage;
+    }
+
+    public void use(Player player) {
+        if(charges > 0) {
+            player.setHealth(player.getHealth() + 100);
+            System.out.println("You used a steak and gained 100 health");
+            charges--;
+        } else {
+            System.out.println("You have no more charges");
+        }
     }
 
     public int getUse() {

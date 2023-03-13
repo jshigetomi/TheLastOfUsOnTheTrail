@@ -7,7 +7,8 @@ import com.lastofus.player.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Battle extends Event{
+public class Battle
+extends Event{
     private final LastOfUsAppController appController = new LastOfUsAppController();
     private final Player player;
     private final List<Scene> sceneList = new ArrayList<>();
@@ -69,13 +70,7 @@ public class Battle extends Event{
                     break;
             }
         }
-        if(zombie.getZHealth() <= 0 ) {
-            happyEnd();
-        }
-
-        else if(player.getHealth() <= 0) {
-            end();
-        }
+        end();
     }
 
     private void branchGunLoop() {
@@ -106,11 +101,6 @@ public class Battle extends Event{
             }
         }
     }
-
-    private void happyEnd() {
-        System.out.println("You killed the zombie with your gun. You win!");
-    }
-
 
     // fighting branch
     private void branchOneLoop() {
@@ -176,7 +166,6 @@ public class Battle extends Event{
             sceneList.get(4).begin();
             System.out.println("Your health: " + player.getHealth());
             if(player.getHealth() <= 0) {
-                System.out.println("You died.");
                 break;
             }
             System.out.println("Choose wisely [1-4]");
@@ -236,14 +225,14 @@ public class Battle extends Event{
         }
     }
 
-
-    @Override
-    public void updatePlayer(Player currentPlayer) {
-
-    }
-
     @Override
     public void end() {
-        System.out.println("You were killed by the Zombie!");
+        if(zombie.getZHealth() <= 0 ) {
+            System.out.println("You killed the zombie. You win!");
+        }
+
+        else if(player.getHealth() <= 0) {
+            System.out.println("The zombie ate your brains. You lose.");
+        }
     }
 }

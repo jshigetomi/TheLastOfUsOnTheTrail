@@ -15,12 +15,10 @@ public abstract class Event {
     }
 
     public void begin() {
-
+        System.out.println("Error: begin() not implemented");
     }
-    public void updatePlayer(Player currentPlayer) {
 
-    }
     public void end() {
-
+        System.out.println("Error: end() not implemented");
     }
 }

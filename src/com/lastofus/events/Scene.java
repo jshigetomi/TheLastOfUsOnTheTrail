@@ -5,24 +5,26 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
-import com.apps.util.Console;
 
 
 class Scene {
     private List<String> allLines;
-    private String prompt;
-    private String[] choices;
 
+    // Constructor that takes in the scene type and scene number.
+    // uses them to initialize path and allLines.
     public Scene(String sceneType, String sceneNumber) {
         try {
             String scene = "S" + sceneNumber;
             String choices = "C" + sceneNumber;
+
+            // assign the path to the scenes folder
             String path = "scenes/" + sceneType + "Scenes.txt";
 
             allLines = Files.lines(Path.of(path))
                     .filter(line -> line.startsWith(scene) || line.startsWith(choices))
                     .limit(5)
-                    .map(line -> line.substring(4))
+                    // get the substring of the line after the colon
+                    .map(line -> line.substring(line.indexOf(":") + 1))
                     .collect(Collectors.toList());
         }
         catch(IOException e) {
