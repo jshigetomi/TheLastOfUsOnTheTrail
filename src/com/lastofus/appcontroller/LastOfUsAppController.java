@@ -41,16 +41,15 @@ public class LastOfUsAppController {
         jansport = new Backpack();
 //        jansport.addItem(steak);
 //        jansport.addItem(medKit);
-        jansport.addItem(new Gun(1));
-        player1.wearBackpack(jansport);
+//        jansport.addItem(new Gun(1));
 
+        player1.wearBackpack(jansport);
     }
 
     public void loadEvents() {
         eventList.add(new Highway(player1));
         eventList.add(new Battle(player1));
         eventList.add(new Forest(player1));
-
     }
 
     public int promptForBackpackChoice(Player player1) {
