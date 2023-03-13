@@ -3,8 +3,8 @@ package com.lastofus.player;
 public class Player {
 
     private String name;
-    private int health;
-    public int attack;
+    private int health = 100;
+    public int attack = 100;
     public int eat;
     private int items;
     private Backpack jansport = null;
