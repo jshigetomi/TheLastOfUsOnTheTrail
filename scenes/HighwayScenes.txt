@@ -8,19 +8,21 @@ C1: 4. walk past the cars
 
 S2: You come across a wandering lamb. What do you do?
 C2: 1. humanely kill it
-C2: 2. run away as fast as you can
-C2: 3. hide under the car
-C2: 4. go back to the highway
+C2: 2. pet it
+C2: 3. check out your backpack inventory
+C2: 4. head back to highway
+
 
 S3: You spot a sheriff vehicle. What do you do?
 C3: 1. search the vehicle
-C3: 2. run away as fast as you can
-C3: 3. hide under the car
-C3: 4. go back to the highway
+C3: 2. hide in the vehicle
+C3: 3. check out your backpack inventory
+C3: 4. head back to highway
 
 S4: You locate an ambulance. What do you do?
 C4: 1. rummage through the ambulance
-C4: 2. run away as fast as you can
-C4: 3. hide and wait to see what happens
-C4: 4. scream and cry
+C4: 2. check the medicine cabinet
+C4: 3. check out your backpack inventory
+C4: 4. head back to highway
+
 
