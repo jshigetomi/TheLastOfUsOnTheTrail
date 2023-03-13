@@ -25,7 +25,7 @@ public class LastOfUsAppController {
         int backpackChoice = promptForBackpackChoice();
     }
 
-    private int promptForBackpackChoice() {
+    public int promptForBackpackChoice() {
         int backpackChoice = 0;
 
         boolean validInput = false; //assume its wrong
@@ -55,7 +55,7 @@ public class LastOfUsAppController {
         //clear console
     }
 
-    private int promptForDecision() { //Prompts the user for an action
+    public int promptForDecision() { //Prompts the user for an action
         int decision = 0;
 
         boolean validInput = false; //assume its wrong
