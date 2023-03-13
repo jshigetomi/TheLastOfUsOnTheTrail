@@ -3,6 +3,8 @@ package com.lastofus.appcontroller;
 import com.lastofus.events.Event;
 import com.lastofus.events.Battle;
 import com.lastofus.events.Highway;
+import com.lastofus.events.Forest;
+
 import com.lastofus.items.Gun;
 import com.lastofus.items.MedKit;
 import com.lastofus.items.Steak;
@@ -19,11 +21,10 @@ public class LastOfUsAppController {
     Random random = new Random(); //Random attack on player
     private Player player1;
     private Backpack jansport;
-    private final Steak steak = new Steak(1);
-    private final MedKit medKit = new MedKit(1);
-    private final Gun gun = new Gun(1);
 
-    private final List<Event> eventList = new ArrayList<>();
+   private final List<Event> eventList = new ArrayList<>();
+
+
 
 
     public void execute() {
@@ -40,13 +41,16 @@ public class LastOfUsAppController {
         jansport = new Backpack();
 //        jansport.addItem(steak);
 //        jansport.addItem(medKit);
-//        jansport.addItem(gun);
+        jansport.addItem(gun);
         player1.wearBackpack(jansport);
+
     }
 
     public void loadEvents() {
         eventList.add(new Highway(player1));
         eventList.add(new Battle(player1));
+        eventList.add(new Forest(player1));
+
     }
 
     public int promptForBackpackChoice(Player player1) {

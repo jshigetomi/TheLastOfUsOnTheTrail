@@ -13,7 +13,7 @@ public class Backpack {
 
     private static final int MAX_SIZE = 5;
     private final List<Item> items = new ArrayList<>();
-    public int load;
+    private int load;
 
 
     public Backpack() {

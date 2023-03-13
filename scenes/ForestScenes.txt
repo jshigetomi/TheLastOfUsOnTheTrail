@@ -1,0 +1,25 @@
+Forest Scenes:
+
+S1: "Crick, crack"... Your ran into a dark forest. What do you do?
+C1: 1. set up camp
+C1: 2. build a trap
+C1: 3. keep running into the abyss
+C1: 4. hide in a tree
+
+S2: You decide to rest in your makeshift shelter. You hear a loud snap. What do you do?
+C2: 1. investigate
+C2: 2. run away as fast as you can
+C2: 3. hide
+C2: 4. curl up and die
+
+S3: A creeper has found you. What do you do?
+C3: 1. attack
+C3: 2. run away as fast as you can
+C3: 3. offer a snack
+C3: 4. go back to the highway
+
+S4: You find a light through the trees. What do you do?
+C4: 1. go to the light
+C4: 2. fight and live another day
+C4: 3. search your backpack for steak
+C4: 4. get lost

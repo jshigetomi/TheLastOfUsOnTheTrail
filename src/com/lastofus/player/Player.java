@@ -5,8 +5,6 @@ public class Player {
     private String name;
     private int health = 100;
     public int attack = 10;
-    public int eat;
-    private int items;
     private Backpack jansport = null;
     boolean isAlive;
 
@@ -25,8 +23,6 @@ public class Player {
         return jansport;
     }
 
-
-
     public String getName() {
         return name;
     }
@@ -43,12 +39,12 @@ public class Player {
         this.health = health;
     }
 
-    public int getItems() {
-        return items;
+    public void setAttack(int value) {
+        this.attack = value;
     }
 
-    public void setItems(int items) {
-        this.items = items;
+    public int getAttack() {
+        return attack;
     }
 
     @Override
@@ -57,18 +53,10 @@ public class Player {
                 "name='" + name + '\'' +
                 ", health=" + health +
                 ", attack=" + attack +
-                ", eat=" + eat +
-                ", items=" + items +
                 ", jansport=" + jansport +
                 ", isAlive=" + isAlive +
                 '}';
     }
 
-    public void setAttack(int value) {
-        this.attack = value;
-    }
 
-    public int getAttack() {
-        return attack;
-    }
 }
