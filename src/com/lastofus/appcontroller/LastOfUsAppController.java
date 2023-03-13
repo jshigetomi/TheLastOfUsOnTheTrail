@@ -18,9 +18,6 @@ public class LastOfUsAppController {
     Random random = new Random(); //Random attack on player
     private Player player1;
     private Backpack jansport;
-    private final Steak steak = new Steak(1);
-    private final MedKit medKit = new MedKit(1);
-    private final Gun gun = new Gun(1);
 
     private final List<Battle> eventList = new ArrayList<>();
 
