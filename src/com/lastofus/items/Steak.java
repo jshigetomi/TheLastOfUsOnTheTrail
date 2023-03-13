@@ -1,10 +1,16 @@
 package com.lastofus.items;
 
-public class Steak {
+import com.lastofus.player.Item;
+
+public class Steak extends Item {
 
     private int charges;
     public int damage;  // this one doesn't make sense. Shouldn't it just be use?
     public int use;
+
+    public Steak(int charges) {
+        this.charges = charges;
+    }
 
     public int getDamage() {
         return damage;
@@ -19,6 +25,10 @@ public class Steak {
     }
 
     public void setUse(int use) {
-        this.use = use;
+        this.use = charges - use;
+    }
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
     }
 }

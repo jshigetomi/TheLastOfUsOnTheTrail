@@ -7,12 +7,14 @@ import com.lastofus.player.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-class Battle implements Event{
+public class Battle extends Event{
     private final LastOfUsAppController appController = new LastOfUsAppController();
     private final Player player;
     private final List<Scene> sceneList = new ArrayList<>();
+    private final Zombie zombie = new Zombie();
 
     public Battle(Player currentPlayer) {
+        super();
         this.player = currentPlayer;
         sceneList.add(new Scene("1"));
         sceneList.add(new Scene("2"));
@@ -20,19 +22,77 @@ class Battle implements Event{
         sceneList.add(new Scene("4"));
         sceneList.add(new Scene("5"));
         sceneList.add(new Scene("6"));
+        sceneList.add(new Scene("7"));
     }
 
     @Override
     public void begin() {
         // while the player is still alive and the sceneList is not empty
         // play the first scene and prompt the user for input
-        Console.clear();
+
         while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+            Console.clear(); // TODO: Ask Jay why this wont clear the screen
+
+            /*
+             * Add art here
+             */
+
             sceneList.get(0).begin();
+            System.out.println("Your health: " + player.getHealth());
+            if(zombie.getZHealth() <= 0 ) {
+                break;
+            }
+
+            if(player.getHealth() <= 0) {
+                break;
+            }
+            System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
             switch(decision) {
                 case 1:
+                    player.setHealth(player.getHealth() - 10);
+                    System.out.println("Punching the zombie in the face did not work. You lost 10 health.");
                     branchOneLoop();
+                    break;
+                case 2:
+                    branchTwoLoop();
+                    break;
+                case 3:
+                    // hide
+                    branchThreeLoop();
+                    break;
+                case 4:
+                    int choice = appController.promptForBackpackChoice(player);
+                    if(choice == 3) {
+                        branchGunLoop();
+                    }
+                    break;
+            }
+        }
+        if(zombie.getZHealth() <= 0 ) {
+            happyEnd();
+        }
+
+        else if(player.getHealth() <= 0) {
+            end();
+        }
+    }
+
+    private void branchGunLoop() {
+        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+            Console.clear();
+            // attacked the zombie with a gun.
+            if(zombie.getZHealth() <= 0 ) {
+                break;
+            }
+            sceneList.get(6).begin();
+            System.out.println("Your health: " + player.getHealth());
+            System.out.println("Choose wisely [1-4]");
+            int decision = appController.promptForDecision();
+            switch(decision) {
+                case 1:
+                    zombie.setZHealth(zombie.getZHealth() - player.getAttack());
+                    branchGunLoop();
                     break;
                 case 2:
                     branchTwoLoop();
@@ -41,10 +101,14 @@ class Battle implements Event{
                     branchThreeLoop();
                     break;
                 case 4:
-                    int choice = appController.promptForBackpackChoice();
+                    int choice = appController.promptForBackpackChoice(player);
                     break;
             }
         }
+    }
+
+    private void happyEnd() {
+        System.out.println("You killed the zombie with your gun. You win!");
     }
 
 
@@ -53,25 +117,27 @@ class Battle implements Event{
         while (player.getHealth() > 0 && !sceneList.isEmpty()) {
             Console.clear();
             // attacked the zombie with bare hands.
-            player.setHealth(player.getHealth() - 10);
-            System.out.println("Punching the zombie in the face did not work. You lost 10 health.");
             sceneList.get(1).begin();
+            System.out.println("Your health: " + player.getHealth());
+            System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
             switch(decision) {
                 case 1:
+                    player.setHealth(player.getHealth() - 10);
+                    System.out.println("Punching the zombie in the face did not work. You lost 10 health.");
                     branchOneLoop();
                     break;
                 case 2:
                     branchTwoLoop();
                     break;
                 case 3:
+                    // hide
                     branchThreeLoop();
                     break;
                 case 4:
-                    int choice = appController.promptForBackpackChoice();
+                    int choice = appController.promptForBackpackChoice(player);
                     break;
             }
-            end();
         }
     }
 
@@ -82,11 +148,12 @@ class Battle implements Event{
             Console.clear();
             // ran from zombie
             sceneList.get(5).begin();
+            System.out.println("Your health: " + player.getHealth());
+            System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
             switch(decision) {
                 case 1:
-                    player.setHealth(player.getHealth() - 10);
-                    System.out.println("Punching the zombie in the face did not work. You lost 10 health.");
+                    branchOneLoop();
                     break;
                 case 2:
                     branchTwoLoop();
@@ -95,7 +162,7 @@ class Battle implements Event{
                     branchThreeLoop();
                     break;
                 case 4:
-                    int choice = appController.promptForBackpackChoice();
+                    int choice = appController.promptForBackpackChoice(player);
                     break;
             }
         }
@@ -107,11 +174,18 @@ class Battle implements Event{
             Console.clear();
             // hid from zombie
             sceneList.get(4).begin();
+            System.out.println("Your health: " + player.getHealth());
+            if(player.getHealth() <= 0) {
+                System.out.println("You died.");
+                break;
+            }
+            System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
             switch(decision) {
                 case 1:
                     player.setHealth(player.getHealth() - 10);
                     System.out.println("Punching the zombie in the face did not work. You lost 10 health.");
+                    branchOneLoop();
                     break;
                 case 2:
                     branchTwoLoop();
@@ -120,6 +194,9 @@ class Battle implements Event{
                     branchThreeLoop();
                     break;
                 case 4:
+                    // scream
+                    player.setHealth(player.getHealth() - 30);
+                    System.out.println("You were slashed by the zombie. You lost 30 health.");
                     deathLoop();
                     break;
             }
@@ -130,14 +207,19 @@ class Battle implements Event{
         while (player.getHealth() > 0 && !sceneList.isEmpty()) {
             Console.clear();
             // slashed by zombie
-            player.setHealth(player.getHealth() - 30);
-            System.out.println("You were slashed by the zombie. You lost 30 health.");
             sceneList.get(3).begin();
+            System.out.println("Your health: " + player.getHealth());
+            if(player.getHealth() <= 0) {
+                System.out.println("You died.");
+                break;
+            }
+            System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
             switch(decision) {
                 case 1:
                     player.setHealth(player.getHealth() - 10);
                     System.out.println("Punching the zombie in the face did not work. You lost 10 health.");
+                    branchOneLoop();
                     break;
                 case 2:
                     branchTwoLoop();
@@ -146,11 +228,12 @@ class Battle implements Event{
                     branchThreeLoop();
                     break;
                 case 4:
+                    player.setHealth(player.getHealth() - 30);
+                    System.out.println("You were slashed by the zombie. You lost 30 health.");
                     deathLoop();
                     break;
             }
         }
-        end();
     }
 
 

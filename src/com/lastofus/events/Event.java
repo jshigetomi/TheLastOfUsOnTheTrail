@@ -6,11 +6,21 @@ import com.lastofus.player.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-interface Event {
-    LastOfUsAppController appController = new LastOfUsAppController();
-    Player player = null;
-    List<Scene> sceneList = new ArrayList<>();
-    void begin();
-    void updatePlayer(Player currentPlayer);
-    void end();
+public abstract class Event {
+    public LastOfUsAppController appController = new LastOfUsAppController();
+    public Player player = null;
+    public List<Scene> sceneList = new ArrayList<>();
+
+    public Event () {
+    }
+
+    public void begin() {
+
+    }
+    public void updatePlayer(Player currentPlayer) {
+
+    }
+    public void end() {
+
+    }
 }
