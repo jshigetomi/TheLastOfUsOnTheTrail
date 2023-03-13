@@ -9,15 +9,15 @@ import com.apps.util.Console;
 
 
 class Scene {
-    private String path = "scenes/Scenes.txt";
     private List<String> allLines;
     private String prompt;
     private String[] choices;
 
-    public Scene(String sceneNumber) {
+    public Scene(String sceneType, String sceneNumber) {
         try {
             String scene = "S" + sceneNumber;
             String choices = "C" + sceneNumber;
+            String path = "scenes/" + sceneType + "Scenes.txt";
 
             allLines = Files.lines(Path.of(path))
                     .filter(line -> line.startsWith(scene) || line.startsWith(choices))
