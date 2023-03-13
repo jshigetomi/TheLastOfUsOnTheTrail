@@ -12,7 +12,6 @@ public class Forest extends Event{
     private Player player;
     private final List<Scene> sceneList = new ArrayList<>();
     private final Zombie zombie = new Zombie();
-  //I removed final here
     private final Highway highway = new Highway(player);
 
     public Forest(Player currentPlayer) {
