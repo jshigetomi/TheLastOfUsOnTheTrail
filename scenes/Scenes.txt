@@ -1,0 +1,37 @@
+Battle Scenes:
+
+S1: You spotted a zombie! The zombie doesn't seem to notice you. What do you do?
+C1: 1. punch it
+C1: 2. run
+C1: 3. hide
+C1: 4. check your backpack
+
+S2: You attacked the zombie with your bare hands. The zombie gets angry.
+C2: 1. punch it
+C2: 2. run
+C2: 3. hide
+C2: 4. use your item
+
+S3: You shot the zombie in the head! The zombie's body falls on the floor.
+C3: 1. inspect the body
+C3: 2. walk away
+C3: 3. go outside
+C3: 4. hide
+
+S4: The zombie attacks you and slashes your neck.
+C4: 1. fight
+C4: 2. run
+C4: 3. hide
+C4: 4. scream
+
+S5: You try to hide but the zombie hears you breathing and comes closer
+C5: 1. fight
+C5: 2. run
+C5: 3. hold your breathe
+C5: 4. scream
+
+S6: You run away but when you look back the zombie is following you...
+C6: 1. punch it
+C6: 2. keep running
+C6: 3. hide
+C6: 5. check your backpack
