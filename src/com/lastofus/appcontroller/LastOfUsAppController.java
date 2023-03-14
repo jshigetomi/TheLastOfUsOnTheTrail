@@ -23,7 +23,7 @@ public class LastOfUsAppController {
     private Backpack jansport;
 
    private final List<Event> eventList = new ArrayList<>();
-   
+
     public void execute() {
         welcome(); //title screen
         nextScene();
