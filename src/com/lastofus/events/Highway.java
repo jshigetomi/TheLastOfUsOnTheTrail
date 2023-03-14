@@ -70,6 +70,8 @@ public class Highway extends Event {
         while (!sceneList.isEmpty() && !quit) {
             Console.clear();
             // kill lamb for steak
+            displayLamb();
+
             sceneList.get(1).begin();
             System.out.println("Your health: " + player.getHealth());
             System.out.println("Choose wisely [1-4]");
@@ -112,6 +114,8 @@ public class Highway extends Event {
         while (!sceneList.isEmpty() && !quit) {
             Console.clear();
             // search vehicle and find gun
+            displaySheriffCar();
+
             sceneList.get(2).begin();
             System.out.println("Your health: " + player.getHealth());
             System.out.println("Choose wisely [1-4]");
@@ -162,14 +166,16 @@ public class Highway extends Event {
         while (!sceneList.isEmpty() && !quit) {
             Console.clear();
             // search vehicle and find medkit
+            displayAmbulance();
+
             sceneList.get(3).begin();
             System.out.println("Your health: " + player.getHealth());
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
             switch (decision) {
                 case 1:
-                    Console.clear();
                     if(kitCounter == 0) {
+                        Console.clear();
                         kitCounter++;
                         MedKit medKit = new MedKit(1);
                         player.getBackpack().addItem(medKit);
@@ -202,6 +208,42 @@ public class Highway extends Event {
     private void displayHighway() {
         try {
             String path = "sceneArt/Highway.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void displaySheriffCar() {
+        try {
+            String path = "sceneArt/SheriffCar.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void displayAmbulance() {
+        try {
+            String path = "sceneArt/Ambulance.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void displayLamb() {
+        try {
+            String path = "sceneArt/Lamb.txt";
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);

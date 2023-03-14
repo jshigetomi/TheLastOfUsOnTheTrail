@@ -17,6 +17,7 @@ public class Forest extends Event{
     private final Zombie zombie = new Zombie();
     private final Highway highway = new Highway(player);
     private boolean quit = false;
+    private int battleCounter = 0;
 
     public Forest(Player currentPlayer) {
         super();
@@ -115,6 +116,8 @@ public class Forest extends Event{
         while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
             // scene 2
+            displayShelter();
+
             sceneList.get(1).begin();
             System.out.println("Your health: " + player.getHealth());
             System.out.println("Choose wisely [1-4]");
@@ -122,16 +125,21 @@ public class Forest extends Event{
             switch(decision) {
                 case 1:
                     //investigate
-                    player.setHealth(player.getHealth() - 10);
-                    System.out.println("You have ran into a zombie");
-                    Battle battle = new Battle(player);
-                    battle.begin();
+                    if(battleCounter == 0) {
+                        battleCounter++;
+                        player.setHealth(player.getHealth() - 10);
+                        System.out.println("You have ran into a zombie");
+                        Battle battle = new Battle(player);
+                        battle.begin();
+                    }
+                    else {
+                        System.out.println("It's just a deer.");
+                        appController.nextScene();
+                    }
                     break;
                 case 2:
                     //run away as fast as you can
-                    System.out.println("Run forest run...");
-                    battle = new Battle(player);
-                    battle.begin();
+                    branchLightLoop();
                     break;
                 case 3:
                     // hide
@@ -150,6 +158,8 @@ public class Forest extends Event{
         while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
             // ran from zombie
+            displayCreeper();
+
             sceneList.get(2).begin();
             System.out.println("Your health: " + player.getHealth());
             System.out.println("Choose wisely [1-4]");
@@ -162,7 +172,8 @@ public class Forest extends Event{
                     break;
                 case 2:
                     //run
-                    //System.out.println("Run forest run...");
+                    System.out.println("Run forest run...");
+                    appController.nextScene();
                     Battle battle = new Battle(player);
                     battle.begin();
                     break;
@@ -171,9 +182,8 @@ public class Forest extends Event{
                     player.setHealth(player.getHealth() - 100);
                     break;
                 case 4:
-                    System.out.println("You found the highway.");
+                    System.out.println("The highway seems more dangerous at night. You turn back around.");
                     appController.nextScene();
-                    highway.begin(); //FIX
                     break;
             }
         }
@@ -184,6 +194,8 @@ public class Forest extends Event{
         while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
             // hid from zombie
+            displayTree();
+
             sceneList.get(3).begin();
             System.out.println("Your health: " + player.getHealth());
             if(player.getHealth() <= 0) {
@@ -194,8 +206,11 @@ public class Forest extends Event{
             switch(decision) {
                 //go to the light
                 case 1:
-                    System.out.println("There's a car");
-                    highway.begin();
+                    Console.clear();
+                    displayRescueJeep();
+                    System.out.println("There's a rescue team! You join a thriving post apocalyptic community");
+                    appController.nextScene();
+                    quit = true;
                     break;
                 case 2:
                     //fight and live another day
@@ -204,13 +219,17 @@ public class Forest extends Event{
                     break;
                 case 3:
                     //search your backpack for steak
-                    System.out.println("You're getting hungry");
+                    System.out.println("You're getting hungry.");
                     int choice = appController.promptForBackpackChoice(player);
                     break;
                 case 4:
                     // Get lost
-                    System.out.println("You await your final moments.");
+                    Console.clear();
+                    displayWanderer();
+                    System.out.println("Realizing there isn't much to live for, " +
+                            "You await your final moments in this cruel and cold world..");
                     player.setHealth(player.getHealth() - 100);
+                    quit = true;
                     break;
             }
         }
@@ -227,6 +246,68 @@ public class Forest extends Event{
             e.printStackTrace();
         }
     }
+
+    private void displayShelter() {
+        try {
+            String path = "sceneArt/Shelter.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void displayCreeper() {
+        try {
+            String path = "sceneArt/Zombie.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void displayTree() {
+        try {
+            String path = "sceneArt/Trees.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void displayRescueJeep() {
+        try {
+            String path = "sceneArt/RescueJeep.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void displayWanderer() {
+        try {
+            String path = "sceneArt/Wanderer.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     @Override
     public void end() {

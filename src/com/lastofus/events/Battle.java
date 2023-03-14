@@ -4,6 +4,9 @@ import com.apps.util.Console;
 import com.lastofus.appcontroller.LastOfUsAppController;
 import com.lastofus.player.Player;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +17,7 @@ public class Battle extends Event{
     private final Zombie zombie = new Zombie();
     private int runCounter = 0;
     private int hideCounter = 0;
+    private boolean quit = false;
 
     public Battle(Player currentPlayer) {
         super();
@@ -32,7 +36,7 @@ public class Battle extends Event{
         // while the player is still alive and the sceneList is not empty
         // play the first scene and prompt the user for input
 
-        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+        while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
 
             /*
@@ -83,7 +87,7 @@ public class Battle extends Event{
     }
 
     private void branchGunLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty() && zombie.getZHealth() > 0) {
+        while (player.getHealth() > 0 && !sceneList.isEmpty() && zombie.getZHealth() > 0 && !quit) {
             Console.clear();
             zombie.display();
             // attacked the zombie with a gun.
@@ -94,8 +98,9 @@ public class Battle extends Event{
             int decision = appController.promptForDecision();
             switch(decision) {
                 case 1:
-                    zombie.setZHealth(zombie.getZHealth() - player.getAttack());
+                    zombie.setZHealth(zombie.getZHealth() - 1000);
                     branchGunLoop();
+                    quit = true;
                     break;
                 case 2:
                     runCounter++;
@@ -114,10 +119,10 @@ public class Battle extends Event{
 
     // fighting branch
     private void branchOneLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+        while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
             // attacked the zombie with bare hands.
-            //zombie.displayAnger();
+            displayZombieAngry();
 
             sceneList.get(1).begin();
             System.out.println("Your health: " + player.getHealth());
@@ -155,7 +160,7 @@ public class Battle extends Event{
 
     // running branch
     private void branchTwoLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+        while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
             if(runCounter >= 2 && runCounter < 5) {
                 System.out.println("You are getting exhausted...");
@@ -172,6 +177,9 @@ public class Battle extends Event{
                 deathLoop();
             }
             Console.clear();
+
+            displayZombieChase();
+
             // ran from zombie
             sceneList.get(5).begin();
             System.out.println("Your health: " + player.getHealth());
@@ -204,9 +212,10 @@ public class Battle extends Event{
 
     // hiding branch
     private void branchThreeLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+        while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
             // hid from zombie
+
             if(hideCounter == 2) {
                 System.out.println("You hold your breathe, but the zombie can sense your body heat!");
                 appController.nextScene();
@@ -221,6 +230,9 @@ public class Battle extends Event{
                 deathLoop();
             }
             Console.clear();
+
+            displayZombieChase();
+
             sceneList.get(4).begin();
             System.out.println("Your health: " + player.getHealth());
             if(player.getHealth() <= 0) {
@@ -254,9 +266,11 @@ public class Battle extends Event{
     }
 
     private void deathLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+        while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
             // slashed by zombie
+            displaySlash();
+
             player.setHealth(player.getHealth()-30);
             sceneList.get(3).begin();
             System.out.println("Your health: " + player.getHealth());
@@ -294,8 +308,55 @@ public class Battle extends Event{
     public void end() {
         Console.clear();
         if(zombie.getZHealth() <= 0 ) {
+            displayZombieDead();
             System.out.println("You killed the zombie. It's getting late and you need shelter. You go into a nearby forest");
             player.setAttack(player.getAttack() - 50);
+        }
+    }
+
+    private void displayZombieAngry () {
+        try {
+            String path = "sceneArt/ZombieAngry.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void displaySlash() {
+        try {
+            String path = "sceneArt/Slash.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void displayZombieChase() {
+        try {
+            String path = "sceneArt/ZombieChase.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void displayZombieDead() {
+        try {
+            String path = "sceneArt/ZombieDead.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

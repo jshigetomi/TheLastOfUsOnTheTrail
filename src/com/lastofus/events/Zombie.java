@@ -30,18 +30,6 @@ class Zombie {
         }
     }
 
-    public void displayAnger() {
-        try {
-            String path = "sceneArt/ZombieAnger.txt";
-            // read the entire file as a string
-            String contents = Files.readString(Path.of(path));
-            System.out.println(contents);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void die() { zHealth = 0; }
 
     public int getZAttack() {

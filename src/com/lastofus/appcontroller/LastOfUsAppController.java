@@ -44,6 +44,7 @@ public class LastOfUsAppController {
     }
 
     private void end() {
+        Console.clear();
         if(player1.hasFriend()) {
             twistEnd();
         }
