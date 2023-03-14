@@ -82,8 +82,6 @@ public class Battle extends Event{
                     break;
             }
         }
-        end();
-        appController.nextScene();
     }
 
     private void branchGunLoop() {
@@ -99,7 +97,8 @@ public class Battle extends Event{
             switch(decision) {
                 case 1:
                     zombie.setZHealth(zombie.getZHealth() - 1000);
-                    branchGunLoop();
+                    displayZombieDead();
+                    System.out.println("You killed the zombie. It's hard to imagine the zombie was once a person.");
                     quit = true;
                     break;
                 case 2:
