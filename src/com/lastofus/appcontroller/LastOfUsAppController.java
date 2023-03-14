@@ -5,10 +5,6 @@ import com.lastofus.events.Event;
 import com.lastofus.events.Battle;
 import com.lastofus.events.Highway;
 import com.lastofus.events.Forest;
-
-import com.lastofus.items.Gun;
-import com.lastofus.items.MedKit;
-import com.lastofus.items.Steak;
 import com.lastofus.player.Backpack;
 import com.lastofus.player.Player;
 
@@ -27,10 +23,7 @@ public class LastOfUsAppController {
     private Backpack jansport;
 
    private final List<Event> eventList = new ArrayList<>();
-
-
-
-
+   
     public void execute() {
         welcome(); //title screen
         nextScene();
