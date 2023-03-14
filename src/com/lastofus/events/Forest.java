@@ -4,6 +4,9 @@ import com.apps.util.Console;
 import com.lastofus.appcontroller.LastOfUsAppController;
 import com.lastofus.player.Player;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +35,7 @@ public class Forest extends Event{
             /*
              * Add art here
              */
+            displayForest();
 
             sceneList.get(0).begin();
             System.out.println("Your health: " + player.getHealth());
@@ -95,6 +99,7 @@ public class Forest extends Event{
                 case 3:
                     System.out.println("The zombie regains its previous consciousness as person");
                     System.out.println("The zombie gives you a warm embrace!");
+                    player.setFriend(true);
                     quit = true;
                     begin();
                     break;
@@ -211,10 +216,19 @@ public class Forest extends Event{
         }
     }
 
+    private void displayForest() {
+        try {
+            String path = "sceneArt/ForestSceneArt.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void end() {
-        if(quit) {
-            appController.setEndingTwist(true);
-        }
     }
 }

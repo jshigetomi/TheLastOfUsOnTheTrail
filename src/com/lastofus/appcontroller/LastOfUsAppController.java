@@ -23,8 +23,6 @@ public class LastOfUsAppController {
     private Player player1;
     private Backpack jansport;
 
-    private boolean endingTwist = false;
-
     private final List<Event> eventList = new ArrayList<>();
 
     public void execute() {
@@ -34,22 +32,26 @@ public class LastOfUsAppController {
             nextScene();
             initializePlayer(); // initialize player
             loadEvents(); // add events to eventList
+
+            // play all events
             for (Event event : eventList) {
                 event.begin();
             }
-            if(player1.getHealth() > 0 && !endingTwist) {
-                theEnd();
-                nextScene();
-            }
-            else if(player1.getHealth() > 0 && endingTwist) {
-                twistEnd();
-                nextScene();
-            }
-            else {
-                youDied();
-                nextScene();
-            }
+
+            end();
             quit = promptForExit();
+        }
+    }
+
+    private void end() {
+        if(player1.hasFriend()) {
+            twistEnd();
+        }
+        else if(player1.getHealth() == 0) {
+            youDied();
+        }
+        else {
+            theEnd();
         }
     }
 
@@ -170,10 +172,6 @@ public class LastOfUsAppController {
         catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void setEndingTwist(boolean endingTwist) {
-        this.endingTwist = endingTwist;
     }
 
     public void theEnd() {

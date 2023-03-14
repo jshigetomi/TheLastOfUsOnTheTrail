@@ -7,6 +7,7 @@ public class Player {
     public int attack = 10;
     private Backpack jansport = null;
     private boolean hasGun = false;
+    private boolean hasFriend = false;
 
     public Player(String name, int health, int attack) {
         this.name = name;
@@ -68,5 +69,13 @@ public class Player {
                 ", attack=" + attack +
                 ", jansport=" + jansport +
                 '}';
+    }
+
+    public boolean hasFriend() {
+        return this.hasFriend;
+    }
+
+    public void setFriend(boolean b) {
+        this.hasFriend = b;
     }
 }

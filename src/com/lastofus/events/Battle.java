@@ -294,7 +294,7 @@ public class Battle extends Event{
     public void end() {
         Console.clear();
         if(zombie.getZHealth() <= 0 ) {
-            System.out.println("You killed the zombie.");
+            System.out.println("You killed the zombie. It's getting late and you need shelter. You go into a nearby forest");
             player.setAttack(player.getAttack() - 50);
         }
     }

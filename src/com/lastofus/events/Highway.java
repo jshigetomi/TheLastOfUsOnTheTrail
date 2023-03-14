@@ -8,6 +8,9 @@ import com.lastofus.items.Steak;
 import com.lastofus.player.Player;
 import com.lastofus.events.Event;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +39,9 @@ public class Highway extends Event {
         while (!sceneList.isEmpty() && !quit) {
             Console.clear();
             // Enter highway
+
+            displayHighway();
+
             sceneList.get(0).begin();
             System.out.println("Your health: " + player.getHealth());
             System.out.println("Choose wisely [1-4]");
@@ -190,6 +196,18 @@ public class Highway extends Event {
                     begin();
                     break;
             }
+        }
+    }
+
+    private void displayHighway() {
+        try {
+            String path = "sceneArt/Highway.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
