@@ -17,4 +17,28 @@ public class BackpackTest {
         backpack.addItem(new Steak(1));
         System.out.println(backpack.getItems().indexOf(new Gun(1)));
     }
+
+    @Test
+    public void removeItem() {
+    }
+
+    @Test
+    public void getLoad() {
+    }
+
+    @Test
+    public void addItem() {
+    }
+
+    @Test
+    public void getItems() {
+    }
+
+    @Test
+    public void viewLoad() {
+    }
+
+    @Test
+    public void getItem() {
+    }
 }

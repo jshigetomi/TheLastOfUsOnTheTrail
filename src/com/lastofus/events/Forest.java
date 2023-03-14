@@ -307,8 +307,6 @@ public class Forest extends Event{
         }
     }
 
-
-
     @Override
     public void end() {
     }
