@@ -26,8 +26,7 @@ public class Forest extends Event{
     public void begin() {
 
         while (player.getHealth() > 0 && !sceneList.isEmpty()) {
-            Console.clear(); // TODO: Ask Jay why this wont clear the screen
-
+            Console.clear();
             /*
              * Add art here
              */
@@ -45,14 +44,14 @@ public class Forest extends Event{
             int decision = appController.promptForDecision();
             switch(decision) {
                 case 1:
-                    player.setHealth(player.getHealth() + 10);
-                    System.out.println("Whew...A spot to rest for the night");
+                    player.setHealth(player.getHealth() + 20);
+                    System.out.println("Whew...A spot to rest for the night. You earned 20 health.");
                     branchCampLoop();
                     break;
                 case 2:
                     //build a trap
-                    System.out.println("You caught a zombie");
-                    player.setAttack(75);
+                    System.out.println("You caught a zombie. Time to kill it.");
+                    player.setAttack(75); //check to see if this is functional
                     break;
                 case 3:
                     // keep running into the abyss
@@ -120,7 +119,7 @@ public class Forest extends Event{
                     break;
                 case 2:
                     //run
-                    System.out.println("Run forest run...");
+                    //System.out.println("Run forest run...");
                     Battle battle = new Battle(player);
                     battle.begin();
                     break;
@@ -152,8 +151,8 @@ public class Forest extends Event{
             switch(decision) {
                 //go to the light
                 case 1:
-                    player.setHealth(player.getHealth() - 100);
-                    System.out.println("Heaven awaits.");
+                    System.out.println("There's a car");
+                    highway.begin();
                     break;
                 case 2:
                     //fight and live another day
@@ -168,6 +167,7 @@ public class Forest extends Event{
                 case 4:
                     // Get lost
                     System.out.println("You await your final moments.");
+                    player.setHealth(player.getHealth() - 100);
                     break;
             }
         }
