@@ -2,7 +2,6 @@ package com.lastofus.events;
 
 import com.apps.util.Console;
 import com.lastofus.appcontroller.LastOfUsAppController;
-import com.lastofus.items.Gun;
 import com.lastofus.player.Player;
 
 import java.util.ArrayList;
@@ -37,6 +36,7 @@ public class Battle extends Event{
             /*
              * Add art here
              */
+            zombie.display();
 
             sceneList.get(0).begin();
             System.out.println("Your health: " + player.getHealth());
@@ -53,6 +53,7 @@ public class Battle extends Event{
                 case 1:
                     player.setHealth(player.getHealth() - 10);
                     System.out.println("Punching the zombie in the face did not work. You lost 10 health.");
+                    appController.nextScene();
                     branchOneLoop();
                     break;
                 case 2:
@@ -64,24 +65,25 @@ public class Battle extends Event{
                     break;
                 case 4:
                     int choice = appController.promptForBackpackChoice(player);
-                    if(!player.getBackpack().getItems().isEmpty()) {
-                        if (player.getBackpack().getItem(choice - 1) instanceof Gun) {
-                            branchGunLoop();
-                        }
+                    if(player.hasGun()) {
+                        branchGunLoop();
+                    }
+                    else {
+                        begin();
                     }
                     break;
             }
         }
         end();
+        appController.nextScene();
     }
 
     private void branchGunLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+        while (player.getHealth() > 0 && !sceneList.isEmpty() && zombie.getZHealth() > 0) {
             Console.clear();
+            zombie.display();
             // attacked the zombie with a gun.
-            if(zombie.getZHealth() <= 0 ) {
-                break;
-            }
+
             sceneList.get(6).begin();
             System.out.println("Your health: " + player.getHealth());
             System.out.println("Choose wisely [1-4]");
@@ -109,6 +111,8 @@ public class Battle extends Event{
         while (player.getHealth() > 0 && !sceneList.isEmpty()) {
             Console.clear();
             // attacked the zombie with bare hands.
+            zombie.displayAnger();
+
             sceneList.get(1).begin();
             System.out.println("Your health: " + player.getHealth());
             System.out.println("Choose wisely [1-4]");
@@ -117,6 +121,7 @@ public class Battle extends Event{
                 case 1:
                     player.setHealth(player.getHealth() - 10);
                     System.out.println("Punching the zombie in the face did not work. You lost 10 health.");
+                    appController.nextScene();
                     branchOneLoop();
                     break;
                 case 2:
@@ -128,6 +133,12 @@ public class Battle extends Event{
                     break;
                 case 4:
                     int choice = appController.promptForBackpackChoice(player);
+                    if(player.hasGun()) {
+                        branchGunLoop();
+                    }
+                    else {
+                        branchOneLoop();
+                    }
                     break;
             }
         }
@@ -155,6 +166,12 @@ public class Battle extends Event{
                     break;
                 case 4:
                     int choice = appController.promptForBackpackChoice(player);
+                    if(player.hasGun()) {
+                        branchGunLoop();
+                    }
+                    else {
+                        branchOneLoop();
+                    }
                     break;
             }
         }
@@ -188,6 +205,7 @@ public class Battle extends Event{
                     // scream
                     player.setHealth(player.getHealth() - 30);
                     System.out.println("You were slashed by the zombie. You lost 30 health.");
+                    appController.nextScene();
                     deathLoop();
                     break;
             }
@@ -221,6 +239,7 @@ public class Battle extends Event{
                 case 4:
                     player.setHealth(player.getHealth() - 30);
                     System.out.println("You were slashed by the zombie. You lost 30 health.");
+                    appController.nextScene();
                     deathLoop();
                     break;
             }
@@ -229,8 +248,11 @@ public class Battle extends Event{
 
     @Override
     public void end() {
+        Console.clear();
         if(zombie.getZHealth() <= 0 ) {
             System.out.println("You killed the zombie. You win!");
+            System.out.println("You used your last bullet to kill the zombie.");
+            player.setAttack(player.getAttack() - 50);
         }
 
         else if(player.getHealth() <= 0) {
