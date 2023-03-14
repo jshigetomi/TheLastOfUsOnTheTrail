@@ -5,13 +5,12 @@ import com.lastofus.events.Event;
 import com.lastofus.events.Battle;
 import com.lastofus.events.Highway;
 import com.lastofus.events.Forest;
-
-import com.lastofus.items.Gun;
-import com.lastofus.items.MedKit;
-import com.lastofus.items.Steak;
 import com.lastofus.player.Backpack;
 import com.lastofus.player.Player;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -25,11 +24,9 @@ public class LastOfUsAppController {
 
    private final List<Event> eventList = new ArrayList<>();
 
-
-
-
     public void execute() {
         welcome(); //title screen
+        nextScene();
         initializePlayer(); // initialize player
         loadEvents(); // add events to eventList
         for(Event event: eventList) {
@@ -121,9 +118,15 @@ public class LastOfUsAppController {
     }
 
     private void welcome() {
-        System.out.println("------------The Last of Us----------"); //Files.readString("Banner.txt")
-        System.out.println("--------A Zombie has appeared:------");
-        System.out.println("--------A Zombie has appeared:------");
+        try {
+            String path = "scenes/Welcome.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void nextScene() {
