@@ -10,7 +10,7 @@ S2: You attacked the zombie with your bare hands. The zombie gets angry.
 C2: 1. punch it
 C2: 2. run
 C2: 3. hide
-C2: 4. use your item
+C2: 4. check your backpack
 
 S3: You shot the zombie in the head! The zombie's body falls on the floor.
 C3: 1. inspect the body
@@ -34,14 +34,10 @@ S6: You run away but when you look back the zombie is following you...
 C6: 1. punch it
 C6: 2. keep running
 C6: 3. hide
-C6: 5. check your backpack
+C6: 4. check your backpack
 
 S7: You spotted a zombie! The zombie doesn't seem to notice you. What do you do?
 C7: 1. shoot the zombie
 C7: 2. run
 C7: 3. hide
 C7: 4. check your backpack
-
-Forrest Scene:
-
-S8: You are in the forrest. You see a tree. What do you do?
