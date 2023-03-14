@@ -1,5 +1,6 @@
 package com.lastofus.appcontroller;
 
+import com.apps.util.Prompter;
 import com.lastofus.events.Event;
 import com.lastofus.events.Battle;
 import com.lastofus.events.Highway;
@@ -59,28 +60,36 @@ public class LastOfUsAppController {
         while (!validInput) {
             System.out.println(player1.getBackpack().viewLoad());
             if(player1.getBackpack().getLoad() == 0) {
+                nextScene();
                 break;
             }
             String input = scanner.nextLine().trim(); //BLOCKS for input
             if (input.matches("\\d{1}")) { //any digit one
                 backpackChoice = Integer.parseInt(input);
-                if (1 <= backpackChoice && backpackChoice <= player1.getBackpack().getLoad()) {
-                    validInput = true;
+                if (1 <= backpackChoice && backpackChoice <= player1.getBackpack().getLoad() || backpackChoice == 6) {
                     switch (backpackChoice) {
                         case 1:
                             player1.getBackpack().getItems().get(0).use(player1);
+                            player1.getBackpack().removeItem(0);
                             break;
                         case 2:
                             player1.getBackpack().getItems().get(1).use(player1);
+                            player1.getBackpack().removeItem(1);
                             break;
                         case 3:
                             player1.getBackpack().getItems().get(2).use(player1);
+                            player1.getBackpack().removeItem(2);
                             break;
                         case 4:
                             player1.getBackpack().getItems().get(3).use(player1);
+                            player1.getBackpack().removeItem(3);
                             break;
                         case 5:
                             player1.getBackpack().getItems().get(4).use(player1);
+                            player1.getBackpack().removeItem(4);
+                            break;
+                        case 6:
+                            validInput = true;
                             break;
                     }
                 }
@@ -115,5 +124,10 @@ public class LastOfUsAppController {
         System.out.println("------------The Last of Us----------"); //Files.readString("Banner.txt")
         System.out.println("--------A Zombie has appeared:------");
         System.out.println("--------A Zombie has appeared:------");
+    }
+
+    public void nextScene() {
+        Prompter prompter = new Prompter(new Scanner(System.in));
+        String input = prompter.prompt("Press enter to continue", ".*", "Invalid input");
     }
 }

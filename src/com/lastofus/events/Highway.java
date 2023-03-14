@@ -29,7 +29,7 @@ public class Highway extends Event {
 
     @Override
     public void begin() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
+        while (!sceneList.isEmpty() && !quit) {
             Console.clear();
             // Enter highway
             sceneList.get(0).begin();
@@ -48,6 +48,7 @@ public class Highway extends Event {
                     break;
                 case 4:
                     System.out.println("Feeling brave? You went out in the open");
+
                     quit = true;
                     break;
             }
@@ -56,7 +57,7 @@ public class Highway extends Event {
 
     // acquire steak branch
     private void lambLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
+        while (!sceneList.isEmpty() && !quit) {
             Console.clear();
             // kill lamb for steak
             sceneList.get(1).begin();
@@ -65,19 +66,21 @@ public class Highway extends Event {
             int decision = appController.promptForDecision();
             switch (decision) {
                 case 1:
-                    player.getBackpack().addItem(new Steak(1));
+                    Console.clear();
+                    Steak steak = new Steak(1);
+                    player.getBackpack().addItem(steak);
+                    steak.display();
                     System.out.println("You acquired a steak into your backpack.");
-                    Console.pause(1000); // temp fix
+                    appController.nextScene();
                     lambLoop();
                     break;
                 case 2:
                     System.out.println("It is so cute, you can't kill it!!");
+                    appController.nextScene();
                     lambLoop();
                     break;
                 case 3:
-                    System.out.println("STAY ALERT: You have " + player.getBackpack().viewLoad()
-                            + "  in your backpack.");
-                    Console.pause(1000); // temp fix
+                    int choice = appController.promptForBackpackChoice(player);
                     lambLoop();
                     break;
                 case 4:
@@ -89,7 +92,7 @@ public class Highway extends Event {
 
     // find gun branch
     private void sheriffLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
+        while (!sceneList.isEmpty() && !quit) {
             Console.clear();
             // search vehicle and find gun
             sceneList.get(2).begin();
@@ -98,19 +101,21 @@ public class Highway extends Event {
             int decision = appController.promptForDecision();
             switch (decision) {
                 case 1:
-                    player.getBackpack().addItem(new Gun(1));
+                    Console.clear();
+                    Gun gun = new Gun(1);
+                    player.getBackpack().addItem(gun);
+                    gun.display();
                     System.out.println("Congratulations, you found a gun and placed it into your backpack.");
-                    Console.pause(1000); // temp fix
+                    appController.nextScene();
                     begin();
                     break;
                 case 2:
                     System.out.println("Stop being a scaredy cat and look around");
+                    appController.nextScene();
                     sheriffLoop();
                     break;
                 case 3:
-                    System.out.println("STAY ALERT: You have " + player.getBackpack().viewLoad()
-                            + "  in your backpack.");
-                    Console.pause(1000); // temp fix
+                    int choice = appController.promptForBackpackChoice(player);
                     sheriffLoop();
                     break;
                 case 4:
@@ -122,7 +127,7 @@ public class Highway extends Event {
 
     // find medkit branch
     private void ambulanceLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
+        while (!sceneList.isEmpty() && !quit) {
             Console.clear();
             // search vehicle and find medkit
             sceneList.get(3).begin();
@@ -131,19 +136,21 @@ public class Highway extends Event {
             int decision = appController.promptForDecision();
             switch (decision) {
                 case 1:
-                    player.getBackpack().addItem(new MedKit(1));
+                    Console.clear();
+                    MedKit medKit = new MedKit(1);
+                    player.getBackpack().addItem(medKit);
+                    medKit.display();
                     System.out.println("Excellent find! You added a medical kit your backpack.");
-                    Console.pause(1000); // temp fix
+                    appController.nextScene();
                     begin();
                     break;
                 case 2:
                     System.out.println("You found sleeping pills instead of a medkit. You're not a doctor!");
+                    appController.nextScene();
                     ambulanceLoop();
                     break;
                 case 3:
-                    System.out.println("STAY ALERT: You have " + player.getBackpack().viewLoad()
-                            + "  in your backpack.");
-                    Console.pause(1000); // temp fix
+                    int choice = appController.promptForBackpackChoice(player);
                     ambulanceLoop();
                     break;
                 case 4:

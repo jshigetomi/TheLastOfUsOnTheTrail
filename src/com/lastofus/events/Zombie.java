@@ -1,5 +1,9 @@
 package com.lastofus.events;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 class Zombie {
 
     private int zHealth = 75;
@@ -12,6 +16,30 @@ class Zombie {
         this();
         this.zAttack = attack;
         this.zHealth = health;
+    }
+
+    public void display() {
+        try {
+            String path = "sceneArt/Zombie.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void displayAnger() {
+        try {
+            String path = "sceneArt/ZombieAnger.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void die() { zHealth = 0; }

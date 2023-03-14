@@ -3,6 +3,10 @@ package com.lastofus.items;
 import com.lastofus.player.Item;
 import com.lastofus.player.Player;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public class MedKit extends Item {
 
     private int charges;
@@ -18,6 +22,18 @@ public class MedKit extends Item {
             charges--;
         } else {
             System.out.println("You have no more charges");
+        }
+    }
+
+    public void display() {
+        try {
+            String path = "backpackArt/Medkit.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
