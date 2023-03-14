@@ -46,6 +46,7 @@ public class Forest extends Event{
                 case 1:
                     player.setHealth(player.getHealth() + 20);
                     System.out.println("Whew...A spot to rest for the night. You earned 20 health.");
+                    Console.pause(4000L);
                     branchCampLoop();
                     break;
                 case 2:
@@ -67,6 +68,39 @@ public class Forest extends Event{
         end();
     }
 
+
+    private void branchForestLoop() {
+        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+            Console.clear();
+            // scene 1
+            sceneList.get(1).begin();
+            System.out.println("Your health: " + player.getHealth());
+            System.out.println("Choose wisely [1-4]");
+            int decision = appController.promptForDecision();
+            switch(decision) {
+                case 1:
+                    player.setHealth(player.getHealth() + 20);
+                    System.out.println("Whew...A spot to rest for the night. You earned 20 health.");
+                    Console.pause(4000L);
+                    branchCampLoop();
+                    break;
+                case 2:
+                    //build a trap
+                    System.out.println("You caught a zombie. Time to kill it.");
+                    player.setAttack(75); //check to see if this is functional
+                    break;
+                case 3:
+                    // keep running into the abyss
+                    Battle battle = new Battle(player);
+                    battle.begin(); //keep running
+                    break;
+                case 4:
+                    //hide in a tree
+                    branchCreeperLoop();
+                    break;
+            }
+        }
+    }
     // Set up camp
     private void branchCampLoop() {
         while (player.getHealth() > 0 && !sceneList.isEmpty()) {
