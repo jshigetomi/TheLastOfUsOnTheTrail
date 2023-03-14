@@ -23,7 +23,9 @@ public class LastOfUsAppController {
     private Player player1;
     private Backpack jansport;
 
-   private final List<Event> eventList = new ArrayList<>();
+    private boolean endingTwist = false;
+
+    private final List<Event> eventList = new ArrayList<>();
 
     public void execute() {
         String quit = "1";
@@ -35,8 +37,12 @@ public class LastOfUsAppController {
             for (Event event : eventList) {
                 event.begin();
             }
-            if(player1.getHealth() > 0) {
+            if(player1.getHealth() > 0 && !endingTwist) {
                 theEnd();
+                nextScene();
+            }
+            else if(player1.getHealth() > 0 && endingTwist) {
+                twistEnd();
                 nextScene();
             }
             else {
@@ -166,9 +172,25 @@ public class LastOfUsAppController {
         }
     }
 
+    public void setEndingTwist(boolean endingTwist) {
+        this.endingTwist = endingTwist;
+    }
+
     public void theEnd() {
         try {
             String path = "scenes/TheEnd.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void twistEnd() {
+        try {
+            String path = "scenes/TwistEnding.txt";
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);

@@ -13,6 +13,7 @@ public class Forest extends Event{
     private final List<Scene> sceneList = new ArrayList<>();
     private final Zombie zombie = new Zombie();
     private final Highway highway = new Highway(player);
+    private boolean quit = false;
 
     public Forest(Player currentPlayer) {
         super();
@@ -21,11 +22,12 @@ public class Forest extends Event{
         sceneList.add(new Scene("Forest", "2"));
         sceneList.add(new Scene("Forest","3"));
         sceneList.add(new Scene("Forest","4"));
+        sceneList.add(new Scene("Forest", "5"));
     }
 
     public void begin() {
 
-        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+        while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
             /*
              * Add art here
@@ -52,6 +54,8 @@ public class Forest extends Event{
                 case 2:
                     //build a trap
                     System.out.println("You caught a zombie. Time to kill it.");
+                    appController.nextScene();
+                    trapLoop();
                     player.setAttack(75); //FIX
                     break;
                 case 3:
@@ -65,12 +69,45 @@ public class Forest extends Event{
                     break;
             }
         }
-        end();
+    }
+
+    private void trapLoop() {
+        while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
+            Console.clear();
+            sceneList.get(4).begin();
+            System.out.println("Your health: " + player.getHealth());
+            System.out.println("Choose wisely [1-4]");
+            int decision = appController.promptForDecision();
+            switch(decision) {
+                case 1:
+                    System.out.println("The zombie's head explodes and its body twitches");
+                    System.out.println("Justice has been served!");
+                    appController.nextScene();
+                    begin();
+                    break;
+                case 2:
+                    System.out.println("The zombie laughs");
+                    System.out.println("Your hand is bleeding from the impact. You lost 10 health");
+                    player.setHealth(player.getHealth()-10);
+                    appController.nextScene();
+                    trapLoop();
+                    break;
+                case 3:
+                    System.out.println("The zombie regains its previous consciousness as person");
+                    System.out.println("The zombie gives you a warm embrace!");
+                    quit = true;
+                    begin();
+                    break;
+                case 4:
+                    begin();
+                    break;
+            }
+        }
     }
 
     // Set up camp
     private void branchCampLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+        while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
             // scene 2
             sceneList.get(1).begin();
@@ -105,7 +142,7 @@ public class Forest extends Event{
 
     // Creeper branch S3
     private void branchCreeperLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+        while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
             // ran from zombie
             sceneList.get(2).begin();
@@ -127,7 +164,6 @@ public class Forest extends Event{
                 case 3:
                     //offer a snack
                     player.setHealth(player.getHealth() - 100);
-                    System.out.println("He eats you.");
                     break;
                 case 4:
                     System.out.println("You found the highway.");
@@ -140,7 +176,7 @@ public class Forest extends Event{
 
     // find a light through the trees branch
     private void branchLightLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+        while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
             // hid from zombie
             sceneList.get(3).begin();
@@ -177,12 +213,8 @@ public class Forest extends Event{
 
     @Override
     public void end() {
-        if(zombie.getZHealth() <= 0 ) {
-            System.out.println("You killed the zombie. You win!");
-        }
-
-        else if(player.getHealth() <= 0) {
-            System.out.println("The zombie ate your brains. You lose.");
+        if(quit) {
+            appController.setEndingTwist(true);
         }
     }
-    }
+}

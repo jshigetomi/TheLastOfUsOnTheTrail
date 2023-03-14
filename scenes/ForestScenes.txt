@@ -23,3 +23,9 @@ C4: 1. go to the light
 C4: 2. fight and live another day
 C4: 3. search your backpack for steak
 C4: 4. get lost
+
+S5: You caught a zombie in your trap! Time to take revenge?
+C5: 1. shoot it in the face!
+C5: 2. punch it
+C5: 3. keep it as a pet ^_^
+C5: 4. go back to the forest
