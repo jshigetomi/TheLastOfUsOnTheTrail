@@ -68,6 +68,7 @@ public class LastOfUsAppController {
 
         boolean validInput = false; //assume its wrong
         while (!validInput) {
+            Console.clear();
             System.out.println(player1.getBackpack().viewLoad());
             if(player1.getBackpack().getLoad() == 0) {
                 nextScene();

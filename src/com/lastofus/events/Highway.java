@@ -15,6 +15,11 @@ public class Highway extends Event {
     private final LastOfUsAppController appController = new LastOfUsAppController();
     private final Player player;
     private final List<Scene> sceneList = new ArrayList<>();
+    private boolean quit = false;
+
+    private int lambCounter = 0;
+    private int gunCounter = 0;
+    private int kitCounter = 0;
 
     public Highway(Player player) {
         super();
@@ -28,7 +33,7 @@ public class Highway extends Event {
 
     @Override
     public void begin() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+        while (!sceneList.isEmpty() && !quit) {
             Console.clear();
             // Enter highway
             sceneList.get(0).begin();
@@ -47,6 +52,8 @@ public class Highway extends Event {
                     break;
                 case 4:
                     System.out.println("Feeling brave? You went out in the open");
+
+                    quit = true;
                     break;
             }
         }
@@ -54,7 +61,7 @@ public class Highway extends Event {
 
     // acquire steak branch
     private void lambLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+        while (!sceneList.isEmpty() && !quit) {
             Console.clear();
             // kill lamb for steak
             sceneList.get(1).begin();
@@ -63,17 +70,28 @@ public class Highway extends Event {
             int decision = appController.promptForDecision();
             switch (decision) {
                 case 1:
-                    player.getBackpack().addItem(new Steak(1));
-                    System.out.println("You acquired a steak into your backpack.");
+                    Console.clear();
+                    if(lambCounter == 0) {
+                        lambCounter++;
+                        Steak steak = new Steak(1);
+                        player.getBackpack().addItem(steak);
+                        steak.display();
+                        System.out.println("You acquired a steak into your backpack.");
+                        appController.nextScene();
+                    }
+                    else {
+                        System.out.println("You already killed the poor thing!");
+                        appController.nextScene();
+                    }
                     lambLoop();
                     break;
                 case 2:
                     System.out.println("It is so cute, you can't kill it!!");
+                    appController.nextScene();
                     lambLoop();
                     break;
                 case 3:
-                    System.out.println("STAY ALERT: You have " + player.getBackpack().viewLoad()
-                            + "  in your backpack.");
+                    int choice = appController.promptForBackpackChoice(player);
                     lambLoop();
                     break;
                 case 4:
@@ -85,7 +103,7 @@ public class Highway extends Event {
 
     // find gun branch
     private void sheriffLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+        while (!sceneList.isEmpty() && !quit) {
             Console.clear();
             // search vehicle and find gun
             sceneList.get(2).begin();
@@ -94,17 +112,36 @@ public class Highway extends Event {
             int decision = appController.promptForDecision();
             switch (decision) {
                 case 1:
-                    player.getBackpack().addItem(new Gun(1));
-                    System.out.println("Congratulations, you found a gun and placed it into your backpack.");
-                    begin();
+                    Console.clear();
+                    if(gunCounter == 0) {
+                        gunCounter++;
+                        Gun gun = new Gun(1);
+                        player.getBackpack().addItem(gun);
+                        gun.display();
+                        System.out.println("Congratulations, you found a gun and placed it into your backpack.");
+                        appController.nextScene();
+                    }
+                    else if(gunCounter == 1) {
+                        gunCounter++;
+                        Gun gun = new Gun(1);
+                        player.getBackpack().addItem(gun);
+                        gun.display();
+                        System.out.println("You looked a bit more and found another gun!");
+                        appController.nextScene();
+                    }
+                    else {
+                        System.out.println("There's nothing useful in the sheriff car anymore");
+                        appController.nextScene();
+                    }
+                    sheriffLoop();
                     break;
                 case 2:
                     System.out.println("Stop being a scaredy cat and look around");
+                    appController.nextScene();
                     sheriffLoop();
                     break;
                 case 3:
-                    System.out.println("STAY ALERT: You have " + player.getBackpack().viewLoad()
-                            + "  in your backpack.");
+                    int choice = appController.promptForBackpackChoice(player);
                     sheriffLoop();
                     break;
                 case 4:
@@ -116,7 +153,7 @@ public class Highway extends Event {
 
     // find medkit branch
     private void ambulanceLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty()) {
+        while (!sceneList.isEmpty() && !quit) {
             Console.clear();
             // search vehicle and find medkit
             sceneList.get(3).begin();
@@ -125,17 +162,28 @@ public class Highway extends Event {
             int decision = appController.promptForDecision();
             switch (decision) {
                 case 1:
-                    player.getBackpack().addItem(new MedKit(1));
-                    System.out.println("Excellent find! You added a medical kit your backpack.");
-                    begin();
+                    Console.clear();
+                    if(kitCounter == 0) {
+                        kitCounter++;
+                        MedKit medKit = new MedKit(1);
+                        player.getBackpack().addItem(medKit);
+                        medKit.display();
+                        System.out.println("Excellent find! You added a medical kit your backpack.");
+                        appController.nextScene();
+                    }
+                    else {
+                        System.out.println("There is nothing useful in the ambulance anymore.");
+                        appController.nextScene();
+                    }
+                    ambulanceLoop();
                     break;
                 case 2:
                     System.out.println("You found sleeping pills instead of a medkit. You're not a doctor!");
+                    appController.nextScene();
                     ambulanceLoop();
                     break;
                 case 3:
-                    System.out.println("STAY ALERT: You have " + player.getBackpack().viewLoad()
-                            + "  in your backpack.");
+                    int choice = appController.promptForBackpackChoice(player);
                     ambulanceLoop();
                     break;
                 case 4:

@@ -36,7 +36,7 @@ C6: 2. keep running
 C6: 3. hide
 C6: 4. check your backpack
 
-S7: You spotted a zombie! The zombie doesn't seem to notice you. What do you do?
+S7: You've got the zombie in your sights. You aim at his head. What do you do?
 C7: 1. shoot the zombie
 C7: 2. run
 C7: 3. hide

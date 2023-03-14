@@ -163,6 +163,7 @@ public class Battle extends Event{
             }
             if(runCounter >= 5 && runCounter <= 8) {
                 System.out.println("You can't run anymore! You have to fight!");
+                player.setHealth(player.getHealth()-10);
                 appController.nextScene();
                 branchOneLoop();
                 return;
@@ -170,7 +171,7 @@ public class Battle extends Event{
             if(runCounter > 8) {
                 deathLoop();
             }
-
+            Console.clear();
             // ran from zombie
             sceneList.get(5).begin();
             System.out.println("Your health: " + player.getHealth());
@@ -212,13 +213,14 @@ public class Battle extends Event{
             }
             if(hideCounter > 2 && hideCounter <= 5) {
                 System.out.println("The zombie is too close. You can't hide anymore. You have to fight!");
+                player.setHealth(player.getHealth()-10);
                 appController.nextScene();
                 branchOneLoop();
             }
             if(hideCounter > 5) {
                 deathLoop();
             }
-
+            Console.clear();
             sceneList.get(4).begin();
             System.out.println("Your health: " + player.getHealth());
             if(player.getHealth() <= 0) {
