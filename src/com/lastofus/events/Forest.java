@@ -52,7 +52,7 @@ public class Forest extends Event{
                 case 2:
                     //build a trap
                     System.out.println("You caught a zombie. Time to kill it.");
-                    player.setAttack(75); //check to see if this is functional
+                    player.setAttack(75); //FIX
                     break;
                 case 3:
                     // keep running into the abyss
@@ -131,7 +131,8 @@ public class Forest extends Event{
                     break;
                 case 4:
                     System.out.println("You found the highway.");
-                    highway.begin();
+                    appController.nextScene();
+                    highway.begin(); //FIX
                     break;
             }
         }
