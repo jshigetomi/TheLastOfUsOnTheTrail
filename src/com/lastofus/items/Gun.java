@@ -1,5 +1,6 @@
 package com.lastofus.items;
 
+import com.apps.util.Console;
 import com.lastofus.player.Item;
 import com.lastofus.player.Player;
 
@@ -17,6 +18,7 @@ public class Gun extends Item {
 
     @Override
     public void use(Player player) {
+        Console.clear();
         if(charges > 0) {
             player.setAttack(player.getAttack() + 50);
             System.out.println("You used a gun and gained 50 attack");

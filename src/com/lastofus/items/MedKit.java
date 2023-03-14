@@ -1,5 +1,6 @@
 package com.lastofus.items;
 
+import com.apps.util.Console;
 import com.lastofus.player.Item;
 import com.lastofus.player.Player;
 
@@ -16,6 +17,7 @@ public class MedKit extends Item {
     }
 
     public void use(Player player) {
+        Console.clear();
         if(charges > 0) {
             player.setHealth(player.getHealth() + 100);
             System.out.println("You used a medkit and gained 100 health");

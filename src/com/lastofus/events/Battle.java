@@ -12,6 +12,8 @@ public class Battle extends Event{
     private final Player player;
     private final List<Scene> sceneList = new ArrayList<>();
     private final Zombie zombie = new Zombie();
+    private int runCounter = 0;
+    private int hideCounter = 0;
 
     public Battle(Player currentPlayer) {
         super();
@@ -57,10 +59,12 @@ public class Battle extends Event{
                     branchOneLoop();
                     break;
                 case 2:
+                    runCounter++;
                     branchTwoLoop();
                     break;
                 case 3:
                     // hide
+                    hideCounter++;
                     branchThreeLoop();
                     break;
                 case 4:
@@ -94,9 +98,11 @@ public class Battle extends Event{
                     branchGunLoop();
                     break;
                 case 2:
+                    runCounter++;
                     branchTwoLoop();
                     break;
                 case 3:
+                    hideCounter++;
                     branchThreeLoop();
                     break;
                 case 4:
@@ -111,7 +117,7 @@ public class Battle extends Event{
         while (player.getHealth() > 0 && !sceneList.isEmpty()) {
             Console.clear();
             // attacked the zombie with bare hands.
-            zombie.displayAnger();
+            //zombie.displayAnger();
 
             sceneList.get(1).begin();
             System.out.println("Your health: " + player.getHealth());
@@ -125,10 +131,12 @@ public class Battle extends Event{
                     branchOneLoop();
                     break;
                 case 2:
+                    runCounter++;
                     branchTwoLoop();
                     break;
                 case 3:
                     // hide
+                    hideCounter++;
                     branchThreeLoop();
                     break;
                 case 4:
@@ -149,6 +157,20 @@ public class Battle extends Event{
     private void branchTwoLoop() {
         while (player.getHealth() > 0 && !sceneList.isEmpty()) {
             Console.clear();
+            if(runCounter >= 2 && runCounter < 5) {
+                System.out.println("You are getting exhausted...");
+                appController.nextScene();
+            }
+            if(runCounter >= 5 && runCounter <= 8) {
+                System.out.println("You can't run anymore! You have to fight!");
+                appController.nextScene();
+                branchOneLoop();
+                return;
+            }
+            if(runCounter > 8) {
+                deathLoop();
+            }
+
             // ran from zombie
             sceneList.get(5).begin();
             System.out.println("Your health: " + player.getHealth());
@@ -159,9 +181,11 @@ public class Battle extends Event{
                     branchOneLoop();
                     break;
                 case 2:
+                    runCounter++;
                     branchTwoLoop();
                     break;
                 case 3:
+                    hideCounter++;
                     branchThreeLoop();
                     break;
                 case 4:
@@ -182,6 +206,19 @@ public class Battle extends Event{
         while (player.getHealth() > 0 && !sceneList.isEmpty()) {
             Console.clear();
             // hid from zombie
+            if(hideCounter == 2) {
+                System.out.println("You hold your breathe, but the zombie can sense your body heat!");
+                appController.nextScene();
+            }
+            if(hideCounter > 2 && hideCounter <= 5) {
+                System.out.println("The zombie is too close. You can't hide anymore. You have to fight!");
+                appController.nextScene();
+                branchOneLoop();
+            }
+            if(hideCounter > 5) {
+                deathLoop();
+            }
+
             sceneList.get(4).begin();
             System.out.println("Your health: " + player.getHealth());
             if(player.getHealth() <= 0) {
@@ -196,9 +233,11 @@ public class Battle extends Event{
                     branchOneLoop();
                     break;
                 case 2:
+                    runCounter++;
                     branchTwoLoop();
                     break;
                 case 3:
+                    hideCounter++;
                     branchThreeLoop();
                     break;
                 case 4:
@@ -216,6 +255,7 @@ public class Battle extends Event{
         while (player.getHealth() > 0 && !sceneList.isEmpty()) {
             Console.clear();
             // slashed by zombie
+            player.setHealth(player.getHealth()-30);
             sceneList.get(3).begin();
             System.out.println("Your health: " + player.getHealth());
             if(player.getHealth() <= 0) {
@@ -231,9 +271,11 @@ public class Battle extends Event{
                     branchOneLoop();
                     break;
                 case 2:
+                    runCounter++;
                     branchTwoLoop();
                     break;
                 case 3:
+                    hideCounter++;
                     branchThreeLoop();
                     break;
                 case 4:
@@ -250,13 +292,8 @@ public class Battle extends Event{
     public void end() {
         Console.clear();
         if(zombie.getZHealth() <= 0 ) {
-            System.out.println("You killed the zombie. You win!");
-            System.out.println("You used your last bullet to kill the zombie.");
+            System.out.println("You killed the zombie.");
             player.setAttack(player.getAttack() - 50);
-        }
-
-        else if(player.getHealth() <= 0) {
-            System.out.println("The zombie ate your brains. You lose.");
         }
     }
 }
