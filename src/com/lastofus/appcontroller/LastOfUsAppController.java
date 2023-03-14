@@ -1,5 +1,6 @@
 package com.lastofus.appcontroller;
 
+import com.apps.util.Console;
 import com.apps.util.Prompter;
 import com.lastofus.events.Event;
 import com.lastofus.events.Battle;
@@ -25,12 +26,24 @@ public class LastOfUsAppController {
    private final List<Event> eventList = new ArrayList<>();
 
     public void execute() {
-        welcome(); //title screen
-        nextScene();
-        initializePlayer(); // initialize player
-        loadEvents(); // add events to eventList
-        for(Event event: eventList) {
-            event.begin();
+        String quit = "1";
+        while(!quit.equals("2")) {
+            welcome(); //title screen
+            nextScene();
+            initializePlayer(); // initialize player
+            loadEvents(); // add events to eventList
+            for (Event event : eventList) {
+                event.begin();
+            }
+            if(player1.getHealth() > 0) {
+                theEnd();
+                nextScene();
+            }
+            else {
+                youDied();
+                nextScene();
+            }
+            quit = promptForExit();
         }
     }
 
@@ -118,6 +131,7 @@ public class LastOfUsAppController {
     }
 
     private void welcome() {
+        Console.clear();
         try {
             String path = "scenes/Welcome.txt";
             // read the entire file as a string
@@ -132,5 +146,34 @@ public class LastOfUsAppController {
     public void nextScene() {
         Prompter prompter = new Prompter(new Scanner(System.in));
         String input = prompter.prompt("Press enter to continue", ".*", "Invalid input");
+    }
+
+    public String promptForExit() {
+        Prompter prompter = new Prompter(new Scanner(System.in));
+        return prompter.prompt("1 to play again, 2 to quit", "1|2", "Invalid input");
+    }
+
+    public void youDied() {
+        try {
+            String path = "scenes/youDied.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void theEnd() {
+        try {
+            String path = "scenes/TheEnd.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

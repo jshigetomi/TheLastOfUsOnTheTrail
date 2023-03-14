@@ -248,6 +248,7 @@ public class Battle extends Event{
 
     @Override
     public void end() {
+        Console.clear();
         if(zombie.getZHealth() <= 0 ) {
             System.out.println("You killed the zombie. You win!");
             System.out.println("You used your last bullet to kill the zombie.");
