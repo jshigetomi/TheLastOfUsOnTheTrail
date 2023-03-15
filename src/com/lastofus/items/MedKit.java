@@ -40,6 +40,11 @@ public class MedKit extends Item {
     }
 
     @Override
+    public void menu() {
+
+    }
+
+    @Override
     public String toString() {
         return getClass().getSimpleName();
     }

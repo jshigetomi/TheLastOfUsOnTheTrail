@@ -40,6 +40,11 @@ public class Steak extends Item {
     }
 
     @Override
+    public void menu() {
+
+    }
+
+    @Override
     public String toString() {
         return getClass().getSimpleName();
     }
