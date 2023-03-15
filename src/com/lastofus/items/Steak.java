@@ -19,8 +19,8 @@ public class Steak extends Item {
     public void use(Player player) {
         Console.clear();
         if(charges > 0) {
-            player.setHealth(player.getHealth() + 100);
-            System.out.println("You used a steak and gained 100 health");
+            player.setHealth(player.getHealth() + 30);
+            System.out.println("You used a steak and gained 30 health");
             charges--;
         } else {
             System.out.println("You have no more charges");
@@ -41,7 +41,11 @@ public class Steak extends Item {
 
     @Override
     public void menu(Player player1) {
-        System.out.printf("Steak: boost in your health\n Total: %s", player1.getHealth());
+        display();
+        System.out.println("Steak: \n" +
+                "[1] Eat it to restore 30 health. This will consume the item.\n" +
+                "[2] Go back.");
+        System.out.println("Your current health is: " + player1.getHealth());
     }
 
     @Override

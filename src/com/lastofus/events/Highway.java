@@ -50,7 +50,8 @@ public class Highway extends Event {
                     break;
                 case 4:
                     System.out.println("Feeling brave? You went out in the open");
-
+                    System.out.println("You see a zombie in the distance blocking your way forward.");
+                    appController.nextScene();
                     quit = true;
                     break;
             }

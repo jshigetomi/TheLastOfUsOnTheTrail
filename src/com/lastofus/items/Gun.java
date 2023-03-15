@@ -20,8 +20,8 @@ public class Gun extends Item {
     public void use(Player player) {
         Console.clear();
         if(charges > 0) {
-            player.setAttack(player.getAttack() + 50);
-            System.out.println("You used a gun and gained 50 attack");
+            player.setAttack(player.getAttack() + 100);
+            System.out.println("You used a gun and gained 100 attack");
             player.setHasGun(true);
             charges--;
         } else {
@@ -43,8 +43,11 @@ public class Gun extends Item {
 
     @Override
     public void menu(Player player1) {
-        System.out.printf("Gun: To shoot a zombie in one kill\n Total: %s", player1.getBackpack().viewLoad());
-        System.out.println(player1.getHealth());
+        display();
+        System.out.println("Gun: \n" +
+                "[1] Equip it. This will increase your attack by 100. This will consume the item.\n" +
+                "[2] Go back.");
+        System.out.println("Your current health is: " + player1.getHealth());
     }
 
     @Override

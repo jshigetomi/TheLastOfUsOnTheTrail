@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-
 public class LastOfUsAppController {
     private final Scanner scanner = new Scanner(System.in);
     Random random = new Random(); //Random attack on player
@@ -78,6 +77,10 @@ public class LastOfUsAppController {
         while (!validInput) {
             Console.clear();
             System.out.println(player1.getBackpack().viewLoad());
+            System.out.println("Your current health is: " + player1.getHealth());
+            if(player1.hasGun()) {
+                System.out.println("Gun Equipped.");
+            }
             if(player1.getBackpack().getLoad() == 0) {
                 nextScene();
                 break;
@@ -87,26 +90,52 @@ public class LastOfUsAppController {
             if (input.matches("\\d{1}")) { //any digit one
                 backpackChoice = Integer.parseInt(input);
                 if (1 <= backpackChoice && backpackChoice <= player1.getBackpack().getLoad() || backpackChoice == 6) {
+                    String decision;
                     switch (backpackChoice) {
                         case 1:
-                            player1.getBackpack().getItems().get(0).use(player1);
-                            player1.getBackpack().removeItem(0);
+                            Console.clear();
+                            player1.getBackpack().getItems().get(0).menu(player1);
+                            decision = prompter.prompt("","1|2","");
+                            if(decision.equals("1")) {
+                                player1.getBackpack().getItems().get(0).use(player1);
+                                player1.getBackpack().removeItem(0);
+                            }
                             break;
                         case 2:
-                            player1.getBackpack().getItems().get(1).use(player1);
-                            player1.getBackpack().removeItem(1);
+                            Console.clear();
+                            player1.getBackpack().getItems().get(1).menu(player1);
+                            decision = prompter.prompt("","1|2","");
+                            if(decision.equals("1")) {
+                                player1.getBackpack().getItems().get(1).use(player1);
+                                player1.getBackpack().removeItem(1);
+                            }
                             break;
                         case 3:
-                            player1.getBackpack().getItems().get(2).use(player1);
-                            player1.getBackpack().removeItem(2);
+                            Console.clear();
+                            player1.getBackpack().getItems().get(2).menu(player1);
+                            decision = prompter.prompt("","1|2","");
+                            if(decision.equals("1")) {
+                                player1.getBackpack().getItems().get(2).use(player1);
+                                player1.getBackpack().removeItem(2);
+                            }
                             break;
                         case 4:
-                            player1.getBackpack().getItems().get(3).use(player1);
-                            player1.getBackpack().removeItem(3);
+                            Console.clear();
+                            player1.getBackpack().getItems().get(3).menu(player1);
+                            decision = prompter.prompt("","1|2","");
+                            if(decision.equals("1")) {
+                                player1.getBackpack().getItems().get(3).use(player1);
+                                player1.getBackpack().removeItem(3);
+                            }
                             break;
                         case 5:
-                            player1.getBackpack().getItems().get(4).use(player1);
-                            player1.getBackpack().removeItem(4);
+                            Console.clear();
+                            player1.getBackpack().getItems().get(4).menu(player1);
+                            decision = prompter.prompt("","1|2","");
+                            if(decision.equals("1")) {
+                                player1.getBackpack().getItems().get(4).use(player1);
+                                player1.getBackpack().removeItem(4);
+                            }
                             break;
                         case 6:
                             validInput = true;
@@ -121,8 +150,8 @@ public class LastOfUsAppController {
 
     public int promptForDecision() { //Prompts the user for an action
         int decision = 0;
-
         boolean validInput = false; //assume its wrong
+
         while (!validInput) {
             String input = scanner.nextLine().trim(); //BLOCKS for input
             if (input.matches("\\d{1}")) { //any digit one
@@ -132,7 +161,6 @@ public class LastOfUsAppController {
                 }
             }
         }
-
         return decision;
     }
 
@@ -158,7 +186,7 @@ public class LastOfUsAppController {
     }
 
     public String promptForExit() {
-        return prompter.prompt("1 to play again, 2 to quit", "1|2", "Invalid input");
+        return prompter.prompt("1 to play again, 2 to quit", "1|2", "Invalid input\n");
     }
 
     public void youDied() {

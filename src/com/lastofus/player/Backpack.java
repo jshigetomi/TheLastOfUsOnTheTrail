@@ -58,7 +58,7 @@ public class Backpack {
         catch (IOException e) {
             e.printStackTrace();
         }
-        StringBuilder load = new StringBuilder("You have " + items.size() + " items in your backpack.");
+        StringBuilder load = new StringBuilder("You have " + items.size() + " item(s) in your backpack.");
         int counter = 1;
         for(Item item : items) {
             load.append(" [").append(counter).append("]: ").append(item.toString());

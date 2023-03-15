@@ -4,7 +4,7 @@ public class Player {
 
     private String name;
     private int health = 100;
-    public int attack = 10;
+    public int attack = 0;
     private Backpack jansport = null;
     private boolean hasGun = false;
     private boolean hasFriend = false;
@@ -20,6 +20,12 @@ public class Player {
     }
 
     public void setHasGun(boolean hasGun) {
+        if(hasGun) {
+            System.out.println("You equipped a gun");
+        }
+        else {
+            System.out.println("The gun is now broken. You throw it away.");
+        }
         this.hasGun = hasGun;
     }
 

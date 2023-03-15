@@ -9,6 +9,12 @@ import static org.junit.Assert.*;
 public class LastOfUsAppControllerTest {
     LastOfUsAppController appController = new LastOfUsAppController();
 
+    public static void main(String[] args) {
+        LastOfUsAppController appController = new LastOfUsAppController();
+        appController.execute();
+
+    }
+
     @Test
     public void testExecuteShouldReturnNewInstanceOfPlayer() {
         appController.execute();

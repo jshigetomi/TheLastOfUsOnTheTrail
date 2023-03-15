@@ -41,7 +41,11 @@ public class MedKit extends Item {
 
     @Override
     public void menu(Player player1) {
-        System.out.printf("Medkit: To fill your life\n Total: %s", player1.getHealth());
+        display();
+        System.out.println("MedKit: \n" +
+                "[1] Use to restore maximum health. This will consume the item.\n" +
+                "[2] Go back.");
+        System.out.println("Your current health is: " + player1.getHealth());
     }
 
     @Override

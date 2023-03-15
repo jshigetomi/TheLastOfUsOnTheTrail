@@ -1,7 +1,7 @@
 package com.lastofus.player;
 
 public abstract class Item {
-    public abstract void use(Player player1);// make abstract
+    public abstract void use(Player player1);
     public abstract void display();
-    public abstract void menu(); // TODO: Display effects of the item and options to use the MedKit or exit
+    public abstract void menu(Player player1);
 }

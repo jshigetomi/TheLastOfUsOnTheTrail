@@ -29,6 +29,9 @@ public class Battle extends Event{
     public void begin() {
         // while the player is still alive and the sceneList is not empty
         // play the first scene and prompt the user for input
+        if(player.hasGun()) {
+            branchGunLoop();
+        }
 
         while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
@@ -89,9 +92,11 @@ public class Battle extends Event{
             int decision = appController.promptForDecision();
             switch(decision) {
                 case 1:
-                    zombie.setZHealth(zombie.getZHealth() - 1000);
+                    Console.clear();
+                    zombie.setZHealth(zombie.getZHealth() - player.getAttack());
                     displayZombieDead();
                     System.out.println("You killed the zombie. It's hard to imagine the zombie was once a person.");
+                    player.setHasGun(false);
                     quit = true;
                     appController.nextScene();
                     break;
