@@ -1,26 +1,20 @@
 package com.lastofus.events;
 
 import com.apps.util.Console;
-import com.lastofus.appcontroller.LastOfUsAppController;
 import com.lastofus.player.Player;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Forest extends Event{
-    private final LastOfUsAppController appController = new LastOfUsAppController();
-    private Player player;
-    private final List<Scene> sceneList = new ArrayList<>();
     private final Zombie zombie = new Zombie();
-    private final Highway highway = new Highway(player);
     private boolean quit = false;
     private int battleCounter = 0;
 
     public Forest(Player currentPlayer) {
-        super();
+        super(currentPlayer);
         this.player = currentPlayer;
         sceneList.add(new Scene("Forest", "1"));
         sceneList.add(new Scene("Forest", "2"));
