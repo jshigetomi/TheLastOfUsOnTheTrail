@@ -8,25 +8,11 @@ import com.lastofus.player.Player;
 
 public class BattleTest {
 
+    // Tested the event using this main method.
     public static void main(String[] args) {
         Player player = new Player("Justin", 100, 100);
         player.wearBackpack(new Backpack(new Steak(1), new Gun(1), new MedKit(1)));
         Event battle = new Battle(player);
         battle.begin();
-    }
-
-    @org.junit.Test
-    public void begin() {
-        Player player = new Player("Justin", 100, 100);
-        Event battle = new Battle(player);
-        battle.begin();
-    }
-
-    @org.junit.Test
-    public void updatePlayer() {
-    }
-
-
-    public void end() {
     }
 }
