@@ -2,6 +2,7 @@ package com.lastofus.events;
 
 import com.apps.util.Console;
 import com.lastofus.items.Hatchet;
+import com.lastofus.items.Steak;
 import com.lastofus.player.Player;
 
 import java.io.IOException;
@@ -14,6 +15,7 @@ public class Forest extends Event{
     private boolean quit = false;
     private int battleCounter = 0;
     private int runCounter = 0;
+    private int hatchetCounter = 0;
 
 
 
@@ -68,43 +70,48 @@ public class Forest extends Event{
                     break;
                 case 4:
                     //hide in a tree
-                    System.out.println("You found a hatchet!");
+                    if(hatchetCounter == 0) {
+                        Console.clear();
+                        hatchetCounter++;
+                        Hatchet hatchet = new Hatchet(2);
+                        player.getBackpack().addItem(hatchet);
+                        hatchet.display();
+                        System.out.println("You acquired a hatchet into your backpack.");
+                    }
                     appController.nextScene();
-                    Hatchet hatchet = new Hatchet(2);
-                    hatchet.display();
                     branchCreeperLoop();
                     break;
             }
         }
     }
 
-    private void branchHatchetLoop() {
-        while (player.getHealth() > 0 && !sceneList.isEmpty() && zombie.getZHealth() > 0 && !quit) {
-            Console.clear();
-            zombie.display();
-            // attacked the zombie with a gun.
-
-            sceneList.get(6).begin();
-            System.out.println("Your health: " + player.getHealth());
-            System.out.println("Choose wisely [1-2]");
-            int decision = appController.promptForDecision();
-            switch(decision) {
-                case 1:
-                    Console.clear();
-                    zombie.setZHealth(zombie.getZHealth() - player.getAttack());
-                    displayZombieDead();
-                    System.out.println("You killed the zombie. It's hard to imagine the zombie was once a person.");
-                    player.setHasHatchet(false);
-                    quit = true;
-                    appController.nextScene();
-                    break;
-                case 2:
-                    runCounter++;
-                    branchLightLoop();
-                    break;
-            }
-        }
-    }
+//    private void branchHatchetLoop() {
+//        while (player.getHealth() > 0 && !sceneList.isEmpty() && zombie.getZHealth() > 0 && !quit) {
+//            Console.clear();
+//            zombie.display();
+//            // attacked the zombie with a hatchet.
+//
+//            sceneList.get(5).begin();
+//            System.out.println("Your health: " + player.getHealth());
+//            System.out.println("Choose wisely [1-2]");
+//            int decision = appController.promptForDecision();
+//            switch(decision) {
+//                case 1:
+//                    Console.clear();
+//                    zombie.setZHealth(zombie.getZHealth() - player.getAttack());
+//                    displayZombieDead();
+//                    System.out.println("You killed another zombie.");
+//                    player.setHasHatchet(false);
+//                    quit = true;
+//                    appController.nextScene();
+//                    break;
+//                case 2:
+//                    runCounter++;
+//                    branchLightLoop();
+//                    break;
+//            }
+//        }
+//    }
 
     private void trapLoop() {
         while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
@@ -204,7 +211,8 @@ public class Forest extends Event{
                     //run
                     System.out.println("Run forest run...");
                     appController.nextScene();
-                    branchHatchetLoop();
+                    Battle battle = new Battle(player);
+                    battle.begin();
                     break;
                 case 3:
                     //offer a snack
