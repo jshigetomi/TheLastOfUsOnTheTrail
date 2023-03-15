@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-// TODO: add an intro that orients the player to the rules of the game, their goal, maximum health...
 
 public class LastOfUsAppController {
     private final Scanner scanner = new Scanner(System.in);
