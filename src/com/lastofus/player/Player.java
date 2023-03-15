@@ -8,6 +8,7 @@ public class Player {
     private Backpack jansport = null;
     private boolean hasGun = false;
     private boolean hasFriend = false;
+    private boolean hasHatchet = false;
 
     public Player(String name, int health, int attack) {
         this.name = name;
@@ -27,6 +28,20 @@ public class Player {
             System.out.println("The gun is now broken. You throw it away.");
         }
         this.hasGun = hasGun;
+    }
+
+    public boolean hasHatchet() {
+        return hasHatchet;
+    }
+
+    public void setHasHatchet(boolean hasHatchet) {
+        if(hasHatchet) {
+            System.out.println("You equipped a hatchet");
+        }
+        else {
+            System.out.println("The hatchet is now broken. You throw it away.");
+        }
+        this.hasHatchet = hasHatchet;
     }
 
     public void wearBackpack (Backpack pack) {

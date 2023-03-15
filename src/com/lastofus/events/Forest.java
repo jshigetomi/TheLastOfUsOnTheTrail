@@ -12,6 +12,9 @@ public class Forest extends Event{
     private final Zombie zombie = new Zombie();
     private boolean quit = false;
     private int battleCounter = 0;
+    private int runCounter = 0;
+
+
 
     public Forest(Player currentPlayer) {
         super(currentPlayer);
@@ -65,6 +68,34 @@ public class Forest extends Event{
                 case 4:
                     //hide in a tree
                     branchCreeperLoop();
+                    break;
+            }
+        }
+    }
+
+    private void branchHatchetLoop() {
+        while (player.getHealth() > 0 && !sceneList.isEmpty() && zombie.getZHealth() > 0 && !quit) {
+            Console.clear();
+            zombie.display();
+            // attacked the zombie with a gun.
+
+            sceneList.get(6).begin();
+            System.out.println("Your health: " + player.getHealth());
+            System.out.println("Choose wisely [1-2]");
+            int decision = appController.promptForDecision();
+            switch(decision) {
+                case 1:
+                    Console.clear();
+                    zombie.setZHealth(zombie.getZHealth() - player.getAttack());
+                    displayZombieDead();
+                    System.out.println("You killed the zombie. It's hard to imagine the zombie was once a person.");
+                    player.setHasHatchet(false);
+                    quit = true;
+                    appController.nextScene();
+                    break;
+                case 2:
+                    runCounter++;
+                    branchLightLoop();
                     break;
             }
         }
@@ -168,8 +199,7 @@ public class Forest extends Event{
                     //run
                     System.out.println("Run forest run...");
                     appController.nextScene();
-                    Battle battle = new Battle(player);
-                    battle.begin();
+                    branchHatchetLoop();
                     break;
                 case 3:
                     //offer a snack
@@ -292,6 +322,18 @@ public class Forest extends Event{
     private void displayWanderer() {
         try {
             String path = "sceneArt/Wanderer.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void displayZombieDead() {
+        try {
+            String path = "sceneArt/ZombieDead.txt";
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
