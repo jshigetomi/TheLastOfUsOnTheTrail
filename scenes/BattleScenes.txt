@@ -31,7 +31,7 @@ C5: 3. hold your breath
 C5: 4. scream
 
 S6: You run away but when you look back the zombie is following you...
-C6: 1. punch it
+C6: 1. fight
 C6: 2. keep running
 C6: 3. hide
 C6: 4. check your backpack
