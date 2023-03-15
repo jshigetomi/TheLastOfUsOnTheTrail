@@ -29,7 +29,7 @@ public class Battle extends Event{
     public void begin() {
         // while the player is still alive and the sceneList is not empty
         // play the first scene and prompt the user for input
-        if(player.hasGun()) {
+        if(player.hasGun() && !quit) {
             branchGunLoop();
         }
 
@@ -117,7 +117,7 @@ public class Battle extends Event{
 
     // fighting branch
     private void branchFightingLoop() {
-        if(player.hasGun()) {
+        if(player.hasGun() && !quit) {
             branchGunLoop();
         }
         while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
@@ -154,6 +154,7 @@ public class Battle extends Event{
                         branchGunLoop();
                     }
                     else {
+                        System.out.println("The zombie catches you off guard and scratches you!");
                         branchFightingLoop();
                     }
                     break;
@@ -166,19 +167,19 @@ public class Battle extends Event{
     private void branchRunningLoop() {
         while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
-            if(runCounter >= 2 && runCounter < 5) {
+            if(runCounter >= 2 && runCounter < 5 && !quit) {
                 displayExhausted();
                 System.out.println("You are getting exhausted...");
                 appController.nextScene();
             }
-            if(runCounter >= 5 && runCounter <= 8) {
+            if(runCounter >= 5 && runCounter <= 8 && !quit) {
                 displayFightingStance();
-                System.out.println("You can't run anymore! You have to fight!");
+                System.out.println("You can't run anymore! You have to fight! The zombie scratches you.");
                 appController.nextScene();
                 branchFightingLoop();
                 return;
             }
-            if(runCounter > 8) {
+            if(runCounter > 8 && !quit) {
                 deathLoop();
             }
             Console.clear();
@@ -227,19 +228,21 @@ public class Battle extends Event{
             Console.clear();
             // hid from zombie
 
-            if(hideCounter == 2) {
+            if(hideCounter == 2 && !quit) {
                 displayHeat();
                 System.out.println("You hold your breathe, but the zombie can sense your body heat!");
                 appController.nextScene();
             }
-            if(hideCounter > 2 && hideCounter <= 5) {
+            if(hideCounter > 2 && hideCounter <= 5 && !quit) {
                 displayFightingStance();
-                System.out.println("The zombie is too close. You can't hide anymore. You have to fight!");
+                System.out.println("The zombie is too close. You can't hide anymore. You have to fight! The zombie scratches you.");
                 appController.nextScene();
                 branchFightingLoop();
+                break;
             }
-            if(hideCounter > 5) {
+            if(hideCounter > 5 && !quit) {
                 deathLoop();
+                break;
             }
             Console.clear();
 

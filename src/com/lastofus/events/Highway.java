@@ -71,19 +71,18 @@ public class Highway extends Event {
             int decision = appController.promptForDecision();
             switch (decision) {
                 case 1:
-                    Console.clear();
                     if(lambCounter == 0) {
+                        Console.clear();
                         lambCounter++;
                         Steak steak = new Steak(1);
                         player.getBackpack().addItem(steak);
                         steak.display();
                         System.out.println("You acquired a steak into your backpack.");
-                        appController.nextScene();
                     }
                     else {
                         System.out.println("You already killed the poor thing!");
-                        appController.nextScene();
                     }
+                    appController.nextScene();
                     lambLoop();
                     break;
                 case 2:
