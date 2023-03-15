@@ -40,8 +40,8 @@ public class Steak extends Item {
     }
 
     @Override
-    public void menu() {
-
+    public void menu(Player player1) {
+        System.out.printf("Steak: boost in your health\n Total: %s", player1.getHealth());
     }
 
     @Override

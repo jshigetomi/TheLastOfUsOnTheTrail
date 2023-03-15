@@ -42,8 +42,9 @@ public class Gun extends Item {
     }
 
     @Override
-    public void menu() {
-
+    public void menu(Player player1) {
+        System.out.printf("Gun: To shoot a zombie in one kill\n Total: %s", player1.getBackpack().viewLoad());
+        System.out.println(player1.getHealth());
     }
 
     @Override

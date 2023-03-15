@@ -40,8 +40,8 @@ public class MedKit extends Item {
     }
 
     @Override
-    public void menu() {
-
+    public void menu(Player player1) {
+        System.out.printf("Medkit: To fill your life\n Total: %s", player1.getHealth());
     }
 
     @Override

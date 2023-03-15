@@ -86,6 +86,7 @@ public class LastOfUsAppController {
                 break;
             }
             String input = scanner.nextLine().trim(); //BLOCKS for input // TODO: tell the player what the item does
+
             if (input.matches("\\d{1}")) { //any digit one
                 backpackChoice = Integer.parseInt(input);
                 if (1 <= backpackChoice && backpackChoice <= player1.getBackpack().getLoad() || backpackChoice == 6) {
