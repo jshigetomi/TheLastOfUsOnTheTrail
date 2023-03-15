@@ -1,49 +1,49 @@
 package com.lastofus.appcontroller;
 
+import com.lastofus.player.Player;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class LastOfUsAppControllerTest {
+    LastOfUsAppController appController = new LastOfUsAppController();
 
-    @Before
-    public void setUp() throws Exception {
+    @Test
+    public void testExecuteShouldReturnNewInstanceOfPlayer() {
+        appController.execute();
+
     }
 
     @Test
-    public void execute() {
+    public void testInitializePlayer() {
     }
 
     @Test
-    public void initializePlayer() {
+    public void testLoadEvents() {
     }
 
     @Test
-    public void loadEvents() {
+    public void testPromptForBackpackChoice() {
     }
 
     @Test
-    public void promptForBackpackChoice() {
+    public void testPromptForDecision() {
     }
 
     @Test
-    public void promptForDecision() {
+    public void testNextScene() {
     }
 
     @Test
-    public void nextScene() {
+    public void testPromptForExit() {
     }
 
     @Test
-    public void promptForExit() {
+    public void testYouDied() {
     }
 
     @Test
-    public void youDied() {
-    }
-
-    @Test
-    public void twistEnd() {
+    public void testTwistEnd() {
     }
 }
