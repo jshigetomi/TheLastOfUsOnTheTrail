@@ -70,6 +70,8 @@ public class Forest extends Event{
                     break;
                 case 4:
                     //hide in a tree
+                    System.out.println("You climbed the tree, but you made so much noise it attracted a nearby zombie!");
+                    appController.nextScene();
                     branchCreeperLoop();
                     break;
             }
@@ -110,6 +112,7 @@ public class Forest extends Event{
     private void trapLoop() {
         while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
+            displayTrap();
             sceneList.get(4).begin();
             System.out.println("Your health: " + player.getHealth());
             System.out.println("Choose wisely [1-4]");
@@ -198,19 +201,20 @@ public class Forest extends Event{
             switch(decision) {
                 case 1:
                     //attack
-                    System.out.println("Attacking the zombie bought you an escape");
-                    appController.nextScene();
-                    branchLightLoop();
-                    break;
-                case 2:
-                    //run
-                    System.out.println("Run forest run...");
+                    System.out.println("You started a fight with the zombie!");
                     appController.nextScene();
                     Battle battle = new Battle(player);
                     battle.begin();
                     break;
+                case 2:
+                    //run
+                    System.out.println("You were able to lose the zombie in the woods!");
+                    appController.nextScene();
+                    branchLightLoop();
+                    break;
                 case 3:
                     //offer a snack
+                    System.out.println("The zombie refused your snack and decided to eat you instead!");
                     player.setHealth(player.getHealth() - 100);
                     break;
                 case 4:
@@ -261,6 +265,7 @@ public class Forest extends Event{
                     System.out.println("Realizing there isn't much to live for, " +
                             "You await your final moments in this cruel and cold world..");
                     player.setHealth(player.getHealth() - 100);
+                    appController.nextScene();
                     quit = true;
                     break;
             }
@@ -342,6 +347,18 @@ public class Forest extends Event{
     private void displayZombieDead() {
         try {
             String path = "sceneArt/ZombieDead.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void displayTrap() {
+        try {
+            String path = "sceneArt/Trap.txt";
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);

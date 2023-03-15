@@ -114,8 +114,8 @@ public class Highway extends Event {
             int decision = appController.promptForDecision();
             switch (decision) {
                 case 1:
-                    Console.clear();
                     if(gunCounter == 0) {
+                        Console.clear();
                         gunCounter++;
                         Gun gun = new Gun(1);
                         player.getBackpack().addItem(gun);
@@ -124,6 +124,7 @@ public class Highway extends Event {
                         appController.nextScene();
                     }
                     else if(gunCounter == 1) {
+                        Console.clear();
                         gunCounter++;
                         Gun gun = new Gun(1);
                         player.getBackpack().addItem(gun);

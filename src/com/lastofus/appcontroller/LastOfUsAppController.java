@@ -37,6 +37,7 @@ public class LastOfUsAppController {
 
             end();
             quit = promptForExit();
+            eventList.clear();
         }
     }
 
