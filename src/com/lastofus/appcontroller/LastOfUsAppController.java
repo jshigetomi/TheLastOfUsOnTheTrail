@@ -2,10 +2,7 @@ package com.lastofus.appcontroller;
 
 import com.apps.util.Console;
 import com.apps.util.Prompter;
-import com.lastofus.events.Event;
-import com.lastofus.events.Battle;
-import com.lastofus.events.Highway;
-import com.lastofus.events.Forest;
+import com.lastofus.events.*;
 import com.lastofus.player.Backpack;
 import com.lastofus.player.Player;
 
@@ -69,6 +66,7 @@ public class LastOfUsAppController {
     }
 
     public void loadEvents() {
+        eventList.add(new Intro(player1));
         eventList.add(new Highway(player1));
         eventList.add(new Battle(player1));
         eventList.add(new Forest(player1));

@@ -1,0 +1,19 @@
+Introduction Scenes:
+
+S1: The sun had long since set over the small town, the dimming glow of a single streetlight across the abandoned
+S1: highway the only source of light. The only sounds were the occasional moans of the undead, as they shambled aimlessly
+S1: through the deserted town. A once thriving community now reduced to nothing more than a post-apocalyptic wasteland.
+S1: The town had been overrun by zombies, their numbers increasing with each passing day.
+S1: But there was one man who still roamed the streets, determined to survive against all odds. Joe had been a resident
+S1: of the town before the outbreak, but now he was the only living soul left.
+S1: Moving cautiously, his footsteps echoing against the concrete. Joe knew he had to be careful, as the zombies were
+S1: always on the hunt for fresh flesh.
+
+
+Instructions Scenes:
+
+S2: HOW TO PLAY: You are Joe. You need to find a way to stay alive. You desperately need to find shelter and supplies,
+S2: but you can only carry 5 items in your backpack. Choose carefully if you want to survive.
+S2: Items you can find are weapons to defend yourself, food, and medical supplies to restore your health.
+S2: You will encounter zombies and will need to kill them to survive. You will need to make the right choices
+S2: or else face unexpected consequences.

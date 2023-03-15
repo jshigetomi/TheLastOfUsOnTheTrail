@@ -1,10 +1,15 @@
 package com.lastofus.events;
 
 import com.apps.util.Console;
+import com.apps.util.Prompter;
 import com.lastofus.player.Player;
 
+import java.util.Scanner;
+
 public class Intro extends Event {
+    private Prompter prompter = new Prompter(new Scanner(System.in));
     private boolean quit = false;
+    private boolean quitGame = false;
 
     public Intro(Player player) {
         super(player);
@@ -14,19 +19,14 @@ public class Intro extends Event {
 
     @Override
     public void begin() {
-        while (!sceneList.isEmpty() && !quit) {
-            Console.clear();
-            sceneList.get(0).begin();
-            int decision = appController.promptForDecision();
-            switch(decision) {
-                case 1:
-                   appController.nextScene();
-                    break;
-                case 2:
-                    appController.nextScene();
-                    break;
-        }
+        Console.clear();
+        sceneList.get(0).begin();
+        System.out.println();
+        appController.nextScene();
+
+        Console.clear();
+        sceneList.get(1).begin();
+        System.out.println();
+        appController.nextScene();
     }
-
-
 }
