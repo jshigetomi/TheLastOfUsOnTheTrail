@@ -7,18 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Event {
-    public LastOfUsAppController appController = new LastOfUsAppController();
-    public Player player = null;
-    public List<Scene> sceneList = new ArrayList<>();
+    protected LastOfUsAppController appController = new LastOfUsAppController();
+    protected Player player = null;
+    protected List<Scene> sceneList = new ArrayList<>();
 
-    public Event () {
+    public Event (Player player) {
+        this.player = player;
     }
 
-    public void begin() {
-        System.out.println("Error: begin() not implemented");
-    }
+    public abstract void begin();
 
-    public void end() {
-        System.out.println("Error: end() not implemented");
-    }
+
+    public void end(){
+
+    };
 }

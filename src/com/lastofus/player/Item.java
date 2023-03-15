@@ -1,11 +1,7 @@
 package com.lastofus.player;
 
 public abstract class Item {
-
-    public void use(Player player1) {
-        System.out.println("This is the parent class Item use method");
-    }
-    public String toString() {
-        return "This is the parent class Item";
-    }
+    public abstract void use(Player player1);// make abstract
+    public abstract void display();
+    public abstract void menu(); // TODO: Display effects of the item and options to use the medkit or exit
 }

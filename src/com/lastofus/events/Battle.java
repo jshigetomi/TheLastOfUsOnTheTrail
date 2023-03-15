@@ -1,27 +1,21 @@
 package com.lastofus.events;
 
 import com.apps.util.Console;
-import com.lastofus.appcontroller.LastOfUsAppController;
 import com.lastofus.player.Player;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Battle extends Event{
-    private final LastOfUsAppController appController = new LastOfUsAppController();
-    private final Player player;
-    private final List<Scene> sceneList = new ArrayList<>();
+
     private final Zombie zombie = new Zombie();
     private int runCounter = 0;
     private int hideCounter = 0;
     private boolean quit = false;
 
     public Battle(Player currentPlayer) {
-        super();
-        this.player = currentPlayer;
+        super(currentPlayer);
         sceneList.add(new Scene("Battle", "1"));
         sceneList.add(new Scene("Battle","2"));
         sceneList.add(new Scene("Battle","3"));

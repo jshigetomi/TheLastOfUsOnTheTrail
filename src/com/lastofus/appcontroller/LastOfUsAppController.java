@@ -17,11 +17,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+// TODO: add an intro that orients the player to the rules of the game, their goal, maximum health...
+
 public class LastOfUsAppController {
     private final Scanner scanner = new Scanner(System.in);
     Random random = new Random(); //Random attack on player
     private Player player1;
-    private Backpack jansport;
+    private final Prompter prompter = new Prompter(new Scanner(System.in));
 
     private final List<Event> eventList = new ArrayList<>();
 
@@ -58,7 +60,7 @@ public class LastOfUsAppController {
 
     public void initializePlayer() {
         player1 = new Player("Joel", 100, 50);
-        jansport = new Backpack();
+        Backpack jansport = new Backpack();
 //        jansport.addItem(steak);
 //        jansport.addItem(medKit);
 //        jansport.addItem(new Gun(1));
@@ -83,7 +85,7 @@ public class LastOfUsAppController {
                 nextScene();
                 break;
             }
-            String input = scanner.nextLine().trim(); //BLOCKS for input
+            String input = scanner.nextLine().trim(); //BLOCKS for input // TODO: tell the player what the item does
             if (input.matches("\\d{1}")) { //any digit one
                 backpackChoice = Integer.parseInt(input);
                 if (1 <= backpackChoice && backpackChoice <= player1.getBackpack().getLoad() || backpackChoice == 6) {
@@ -154,12 +156,10 @@ public class LastOfUsAppController {
     }
 
     public void nextScene() {
-        Prompter prompter = new Prompter(new Scanner(System.in));
         String input = prompter.prompt("Press enter to continue", ".*", "Invalid input");
     }
 
     public String promptForExit() {
-        Prompter prompter = new Prompter(new Scanner(System.in));
         return prompter.prompt("1 to play again, 2 to quit", "1|2", "Invalid input");
     }
 

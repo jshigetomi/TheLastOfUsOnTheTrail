@@ -1,23 +1,16 @@
 package com.lastofus.events;
 
 import com.apps.util.Console;
-import com.lastofus.appcontroller.LastOfUsAppController;
 import com.lastofus.items.Gun;
 import com.lastofus.items.MedKit;
 import com.lastofus.items.Steak;
 import com.lastofus.player.Player;
-import com.lastofus.events.Event;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Highway extends Event {
-    private final LastOfUsAppController appController = new LastOfUsAppController();
-    private final Player player;
-    private final List<Scene> sceneList = new ArrayList<>();
     private boolean quit = false;
 
     private int lambCounter = 0;
@@ -25,8 +18,7 @@ public class Highway extends Event {
     private int kitCounter = 0;
 
     public Highway(Player player) {
-        super();
-        this.player = player;
+        super(player);
         sceneList.add(new Scene("Highway", "1"));
         sceneList.add(new Scene("Highway", "2"));
         sceneList.add(new Scene("Highway", "3"));
