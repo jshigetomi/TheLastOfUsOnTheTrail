@@ -1,6 +1,7 @@
 package com.lastofus.events;
 
 import com.apps.util.Console;
+import com.lastofus.items.Hatchet;
 import com.lastofus.player.Player;
 
 import java.io.IOException;
@@ -67,6 +68,10 @@ public class Forest extends Event{
                     break;
                 case 4:
                     //hide in a tree
+                    System.out.println("You found a hatchet!");
+                    appController.nextScene();
+                    Hatchet hatchet = new Hatchet(2);
+                    hatchet.display();
                     branchCreeperLoop();
                     break;
             }
