@@ -30,6 +30,4 @@ C5: 2. punch it
 C5: 3. keep it as a pet ^_^
 C5: 4. go back to the forest
 
-S5: You caught a zombie in your trap! Time to take revenge?
-C5: 1. Strike the zombie with your hatchet!
-C5: 2. run away
+

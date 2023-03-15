@@ -70,15 +70,6 @@ public class Forest extends Event{
                     break;
                 case 4:
                     //hide in a tree
-                    if(hatchetCounter == 0) {
-                        Console.clear();
-                        hatchetCounter++;
-                        Hatchet hatchet = new Hatchet(2);
-                        player.getBackpack().addItem(hatchet);
-                        hatchet.display();
-                        System.out.println("You acquired a hatchet into your backpack.");
-                    }
-                    appController.nextScene();
                     branchCreeperLoop();
                     break;
             }
@@ -86,6 +77,9 @@ public class Forest extends Event{
     }
 
 //    private void branchHatchetLoop() {
+//        if(player.hasHatchet() && !quit) {
+//            branchGunLoop();
+//        }
 //        while (player.getHealth() > 0 && !sceneList.isEmpty() && zombie.getZHealth() > 0 && !quit) {
 //            Console.clear();
 //            zombie.display();
@@ -204,8 +198,9 @@ public class Forest extends Event{
             switch(decision) {
                 case 1:
                     //attack
-                    zombie.setZHealth(zombie.getZHealth() - 25);
-                    System.out.println("You attacked your zombie");
+                    System.out.println("Attacking the zombie bought you an escape");
+                    appController.nextScene();
+                    branchLightLoop();
                     break;
                 case 2:
                     //run
@@ -219,7 +214,7 @@ public class Forest extends Event{
                     player.setHealth(player.getHealth() - 100);
                     break;
                 case 4:
-                    System.out.println("The highway seems more dangerous at night. You turn back around.");
+                    System.out.println("The forest seems more dangerous at night. You turn back around.");
                     appController.nextScene();
                     break;
             }
