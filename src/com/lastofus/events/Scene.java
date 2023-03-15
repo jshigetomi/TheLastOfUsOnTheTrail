@@ -22,7 +22,7 @@ class Scene {
 
             allLines = Files.lines(Path.of(path))
                     .filter(line -> line.startsWith(scene) || line.startsWith(choices))
-                    .limit(5)
+                    .limit(10)
                     // get the substring of the line after the colon
                     .map(line -> line.substring(line.indexOf(":") + 1))
                     .collect(Collectors.toList());
