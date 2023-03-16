@@ -14,6 +14,9 @@ public class Battle extends Event{
     private int hideCounter = 0;
     private boolean quit = false;
 
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
+
     public Battle(Player currentPlayer) {
         super(currentPlayer);
         sceneList.add(new Scene("Battle", "1"));
@@ -42,7 +45,7 @@ public class Battle extends Event{
             zombie.display();
 
             sceneList.get(0).begin();
-            System.out.println("Your health: " + player.getHealth());
+            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             if(zombie.getZHealth() <= 0 ) {
                 break;
             }
@@ -87,7 +90,7 @@ public class Battle extends Event{
             // attacked the zombie with a gun.
 
             sceneList.get(6).begin();
-            System.out.println("Your health: " + player.getHealth());
+            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
             switch(decision) {
@@ -130,7 +133,7 @@ public class Battle extends Event{
 
             sceneList.get(1).begin();
             player.setHealth(player.getHealth()-10);
-            System.out.println("Your health: " + player.getHealth());
+            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
             switch(decision) {
@@ -188,7 +191,7 @@ public class Battle extends Event{
 
             // ran from zombie
             sceneList.get(5).begin();
-            System.out.println("Your health: " + player.getHealth());
+            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
             switch(decision) {
@@ -249,7 +252,7 @@ public class Battle extends Event{
             displayZombieChase();
 
             sceneList.get(4).begin();
-            System.out.println("Your health: " + player.getHealth());
+            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             if(player.getHealth() <= 0) {
                 break;
             }
@@ -294,7 +297,7 @@ public class Battle extends Event{
 
             player.setHealth(player.getHealth()-30);
             sceneList.get(3).begin();
-            System.out.println("Your health: " + player.getHealth());
+            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             if(player.getHealth() <= 0) {
                 System.out.println("You died.");
                 break;

@@ -17,6 +17,9 @@ public class Highway extends Event {
     private int gunCounter = 0;
     private int kitCounter = 0;
 
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
+
     public Highway(Player player) {
         super(player);
         sceneList.add(new Scene("Highway", "1"));
@@ -35,7 +38,7 @@ public class Highway extends Event {
             displayHighway();
 
             sceneList.get(0).begin();
-            System.out.println("Your health: " + player.getHealth());
+            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
             switch (decision) {
@@ -70,7 +73,7 @@ public class Highway extends Event {
                 displayDeadLamb();
             }
             sceneList.get(1).begin();
-            System.out.println("Your health: " + player.getHealth());
+            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
             switch (decision) {
@@ -117,7 +120,7 @@ public class Highway extends Event {
             displaySheriffCar();
 
             sceneList.get(2).begin();
-            System.out.println("Your health: " + player.getHealth());
+            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
             switch (decision) {
@@ -170,7 +173,7 @@ public class Highway extends Event {
             displayAmbulance();
 
             sceneList.get(3).begin();
-            System.out.println("Your health: " + player.getHealth());
+            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
             switch (decision) {

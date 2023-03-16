@@ -17,4 +17,4 @@ S2: but you can only carry 5 items in your backpack. Choose carefully if you wan
 S2: Items you can find are weapons to defend yourself, food, and medical supplies to restore your health.
 S2: You will encounter zombies and will need to kill them to survive. You will need to make the right choices
 S2: or else face unexpected consequences. You start with 100 health, and that is the maximum health you can have.
-S2: You start with zero attack until equip a weapon.
+S2: You start with zero attack until you equip a weapon.

@@ -14,8 +14,10 @@ public class Forest extends Event{
     private final Zombie zombie = new Zombie();
     private boolean quit = false;
     private int battleCounter = 0;
-    private int runCounter = 0;
-    private int hatchetCounter = 0;
+
+
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
 
 
 
@@ -39,7 +41,7 @@ public class Forest extends Event{
             displayForest();
 
             sceneList.get(0).begin();
-            System.out.println("Your health: " + player.getHealth());
+            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             if(zombie.getZHealth() <= 0 ) {
                 break;
             }
@@ -114,7 +116,7 @@ public class Forest extends Event{
             Console.clear();
             displayTrap();
             sceneList.get(4).begin();
-            System.out.println("Your health: " + player.getHealth());
+            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
             switch(decision) {
@@ -153,7 +155,7 @@ public class Forest extends Event{
             displayShelter();
 
             sceneList.get(1).begin();
-            System.out.println("Your health: " + player.getHealth());
+            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
             switch(decision) {
@@ -181,6 +183,7 @@ public class Forest extends Event{
                     break;
                 case 4:
                     //curl up and die
+                    player.setHealth(player.getHealth() - 100);
                     break;
             }
         }
@@ -201,7 +204,7 @@ public class Forest extends Event{
             displayCreeper();
 
             sceneList.get(2).begin();
-            System.out.println("Your health: " + player.getHealth());
+            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
             switch(decision) {
@@ -240,7 +243,7 @@ public class Forest extends Event{
             displayTree();
 
             sceneList.get(3).begin();
-            System.out.println("Your health: " + player.getHealth());
+            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             if(player.getHealth() <= 0) {
                 break;
             }

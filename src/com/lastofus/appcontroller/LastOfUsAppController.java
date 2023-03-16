@@ -16,7 +16,6 @@ import java.util.Scanner;
 
 public class LastOfUsAppController {
     private final Scanner scanner = new Scanner(System.in);
-    Random random = new Random(); //Random attack on player
     private Player player1;
     private final Prompter prompter = new Prompter(new Scanner(System.in));
 
