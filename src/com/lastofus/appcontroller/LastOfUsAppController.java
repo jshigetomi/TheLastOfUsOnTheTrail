@@ -11,7 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class LastOfUsAppController {
@@ -55,7 +54,7 @@ public class LastOfUsAppController {
         }
     }
 
-    public void initializePlayer() {
+    private void initializePlayer() {
         player1 = new Player("Joel", 100, 50);
         Backpack jansport = new Backpack();
 //        jansport.addItem(steak);
@@ -65,7 +64,7 @@ public class LastOfUsAppController {
         player1.wearBackpack(jansport);
     }
 
-    public void loadEvents() {
+    private void loadEvents() {
         eventList.add(new Intro(player1));
         eventList.add(new Highway(player1));
         eventList.add(new Battle(player1));
@@ -166,10 +165,6 @@ public class LastOfUsAppController {
         return decision;
     }
 
-    private void showOptionsList() {
-    // eventList
-    }
-
     private void welcome() {
         Console.clear();
         try {
@@ -187,11 +182,11 @@ public class LastOfUsAppController {
         String input = prompter.prompt("Press enter to continue", ".*", "Invalid input");
     }
 
-    public String promptForExit() {
+    private String promptForExit() {
         return prompter.prompt("1 to play again, 2 to quit", "1|2", "Invalid input\n");
     }
 
-    public void youDied() {
+    private void youDied() {
         try {
             String path = "scenes/youDied.txt";
             // read the entire file as a string
@@ -203,7 +198,7 @@ public class LastOfUsAppController {
         }
     }
 
-    public void theEnd() {
+    private void theEnd() {
         try {
             String path = "scenes/TheEnd.txt";
             // read the entire file as a string
@@ -215,7 +210,7 @@ public class LastOfUsAppController {
         }
     }
 
-    public void twistEnd() {
+    private void twistEnd() {
         try {
             String path = "scenes/TwistEnding.txt";
             // read the entire file as a string
