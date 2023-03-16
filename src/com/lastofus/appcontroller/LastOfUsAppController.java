@@ -21,6 +21,8 @@ public class LastOfUsAppController {
     private final Prompter prompter = new Prompter(new Scanner(System.in));
 
     private final List<Event> eventList = new ArrayList<>();
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
 
     public void execute() {
         String quit = "1";
@@ -78,7 +80,7 @@ public class LastOfUsAppController {
         while (!validInput) {
             Console.clear();
             System.out.println(player1.getBackpack().viewLoad());
-            System.out.println("Your current health is: " + player1.getHealth());
+            System.out.println(ANSI_RED + "Your current health is: " + player1.getHealth() + ANSI_RESET);
             if(player1.hasGun()) {
                 System.out.println("Gun Equipped.");
             }
