@@ -63,8 +63,12 @@ public class Highway extends Event {
         while (!sceneList.isEmpty() && !quit) {
             Console.clear();
             // kill lamb for steak
-            displayLamb();
-
+            if(lambCounter == 0) {
+                displayLamb();
+            }
+            else {
+                displayDeadLamb();
+            }
             sceneList.get(1).begin();
             System.out.println("Your health: " + player.getHealth());
             System.out.println("Choose wisely [1-4]");
@@ -86,7 +90,12 @@ public class Highway extends Event {
                     lambLoop();
                     break;
                 case 2:
-                    System.out.println("It is so cute, you can't kill it!!");
+                    if(lambCounter == 0) {
+                        System.out.println("It is so cute, you can't kill it!!");
+                    }
+                    else {
+                        System.out.println("The body is still warm....");
+                    }
                     appController.nextScene();
                     lambLoop();
                     break;
@@ -100,7 +109,6 @@ public class Highway extends Event {
             }
         }
     }
-
     // find gun branch
     private void sheriffLoop() {
         while (!sceneList.isEmpty() && !quit) {
@@ -245,4 +253,17 @@ public class Highway extends Event {
             e.printStackTrace();
         }
     }
+
+    private void displayDeadLamb() {
+        try {
+            String path = "sceneArt/DeadLamb.txt";
+            // read the entire file as a string
+            String contents = Files.readString(Path.of(path));
+            System.out.println(contents);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

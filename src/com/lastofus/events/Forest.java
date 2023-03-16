@@ -190,6 +190,12 @@ public class Forest extends Event{
     // Creeper branch S3
     private void branchCreeperLoop() {
         while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
+            if(battleCounter  > 0) {
+                System.out.println("After the battle you head forward and see a light through the woods.");
+                appController.nextScene();
+                branchLightLoop();
+                break;
+            }
             Console.clear();
             // ran from zombie
             displayCreeper();
@@ -201,6 +207,7 @@ public class Forest extends Event{
             switch(decision) {
                 case 1:
                     //attack
+                    battleCounter++;
                     System.out.println("You started a fight with the zombie!");
                     appController.nextScene();
                     Battle battle = new Battle(player);
@@ -218,7 +225,7 @@ public class Forest extends Event{
                     player.setHealth(player.getHealth() - 100);
                     break;
                 case 4:
-                    System.out.println("The forest seems more dangerous at night. You turn back around.");
+                    System.out.println("The highway seems more dangerous at night. You turn back around.");
                     appController.nextScene();
                     break;
             }
