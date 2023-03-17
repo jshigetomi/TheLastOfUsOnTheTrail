@@ -7,32 +7,30 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class Battle extends Event{
+public class Battle extends Event {
 
     private final Zombie zombie = new Zombie();
     private int runCounter = 0;
     private int hideCounter = 0;
     private boolean quit = false;
 
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_RESET = "\u001B[0m";
 
     public Battle(Player currentPlayer) {
         super(currentPlayer);
         sceneList.add(new Scene("Battle", "1"));
-        sceneList.add(new Scene("Battle","2"));
-        sceneList.add(new Scene("Battle","3"));
-        sceneList.add(new Scene("Battle","4"));
-        sceneList.add(new Scene("Battle","5"));
-        sceneList.add(new Scene("Battle","6"));
-        sceneList.add(new Scene("Battle","7"));
+        sceneList.add(new Scene("Battle", "2"));
+        sceneList.add(new Scene("Battle", "3"));
+        sceneList.add(new Scene("Battle", "4"));
+        sceneList.add(new Scene("Battle", "5"));
+        sceneList.add(new Scene("Battle", "6"));
+        sceneList.add(new Scene("Battle", "7"));
     }
 
     @Override
     public void begin() {
         // while the player is still alive and the sceneList is not empty
         // play the first scene and prompt the user for input
-        if(player.hasGun() && !quit) {
+        if (player.hasGun() && !quit) {
             branchGunLoop();
         }
 
@@ -46,16 +44,16 @@ public class Battle extends Event{
 
             sceneList.get(0).begin();
             System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
-            if(zombie.getZHealth() <= 0 ) {
+            if (zombie.getZHealth() <= 0) {
                 break;
             }
 
-            if(player.getHealth() <= 0) {
+            if (player.getHealth() <= 0) {
                 break;
             }
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
-            switch(decision) {
+            switch (decision) {
                 case 1:
                     System.out.println("Punching the zombie in the face did not work.");
                     appController.nextScene();
@@ -72,10 +70,9 @@ public class Battle extends Event{
                     break;
                 case 4:
                     int choice = appController.promptForBackpackChoice(player);
-                    if(player.hasGun()) {
+                    if (player.hasGun()) {
                         branchGunLoop();
-                    }
-                    else {
+                    } else {
                         begin();
                     }
                     break;
@@ -93,7 +90,7 @@ public class Battle extends Event{
             System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
-            switch(decision) {
+            switch (decision) {
                 case 1:
                     Console.clear();
                     zombie.setZHealth(zombie.getZHealth() - player.getAttack());
@@ -120,7 +117,7 @@ public class Battle extends Event{
 
     // fighting branch
     private void branchFightingLoop() {
-        if(player.hasGun() && !quit) {
+        if (player.hasGun() && !quit) {
             branchGunLoop();
         }
         while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
@@ -132,11 +129,11 @@ public class Battle extends Event{
             displayZombieAngry();
 
             sceneList.get(1).begin();
-            player.setHealth(player.getHealth()-10);
+            player.setHealth(player.getHealth() - 10);
             System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
-            switch(decision) {
+            switch (decision) {
                 case 1:
                     System.out.println("Punching the zombie in the face did not work.");
                     appController.nextScene();
@@ -153,10 +150,9 @@ public class Battle extends Event{
                     break;
                 case 4:
                     int choice = appController.promptForBackpackChoice(player);
-                    if(player.hasGun()) {
+                    if (player.hasGun()) {
                         branchGunLoop();
-                    }
-                    else {
+                    } else {
                         System.out.println("The zombie catches you off guard and scratches you!");
                         branchFightingLoop();
                     }
@@ -170,19 +166,19 @@ public class Battle extends Event{
     private void branchRunningLoop() {
         while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
-            if(runCounter >= 2 && runCounter < 5 && !quit) {
+            if (runCounter >= 2 && runCounter < 5 && !quit) {
                 displayExhausted();
                 System.out.println("You are getting exhausted...");
                 appController.nextScene();
             }
-            if(runCounter >= 5 && runCounter <= 8 && !quit) {
+            if (runCounter >= 5 && runCounter <= 8 && !quit) {
                 displayFightingStance();
                 System.out.println("You can't run anymore! You have to fight! The zombie scratches you.");
                 appController.nextScene();
                 branchFightingLoop();
                 return;
             }
-            if(runCounter > 8 && !quit) {
+            if (runCounter > 8 && !quit) {
                 deathLoop();
             }
             Console.clear();
@@ -194,13 +190,12 @@ public class Battle extends Event{
             System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
-            switch(decision) {
+            switch (decision) {
                 case 1:
-                    if(player.hasGun()) {
+                    if (player.hasGun()) {
                         branchGunLoop();
                         return;
-                    }
-                    else {
+                    } else {
                         branchFightingLoop();
                     }
                     break;
@@ -214,10 +209,9 @@ public class Battle extends Event{
                     break;
                 case 4:
                     int choice = appController.promptForBackpackChoice(player);
-                    if(player.hasGun()) {
+                    if (player.hasGun()) {
                         branchGunLoop();
-                    }
-                    else {
+                    } else {
                         branchFightingLoop();
                     }
                     break;
@@ -231,19 +225,19 @@ public class Battle extends Event{
             Console.clear();
             // hid from zombie
 
-            if(hideCounter == 2 && !quit) {
+            if (hideCounter == 2 && !quit) {
                 displayHeat();
                 System.out.println("You hold your breathe, but the zombie can sense your body heat!");
                 appController.nextScene();
             }
-            if(hideCounter > 2 && hideCounter <= 5 && !quit) {
+            if (hideCounter > 2 && hideCounter <= 5 && !quit) {
                 displayFightingStance();
                 System.out.println("The zombie is too close. You can't hide anymore. You have to fight! The zombie scratches you.");
                 appController.nextScene();
                 branchFightingLoop();
                 break;
             }
-            if(hideCounter > 5 && !quit) {
+            if (hideCounter > 5 && !quit) {
                 deathLoop();
                 break;
             }
@@ -253,18 +247,17 @@ public class Battle extends Event{
 
             sceneList.get(4).begin();
             System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
-            if(player.getHealth() <= 0) {
+            if (player.getHealth() <= 0) {
                 break;
             }
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
-            switch(decision) {
+            switch (decision) {
                 case 1:
-                    if(player.hasGun()) {
+                    if (player.hasGun()) {
                         branchGunLoop();
                         return;
-                    }
-                    else {
+                    } else {
                         player.setHealth(player.getHealth() - 10);
                         System.out.println("Punching the zombie in the face did not work. You lost 10 health.");
                         branchFightingLoop();
@@ -295,21 +288,20 @@ public class Battle extends Event{
             // slashed by zombie
             displaySlash();
 
-            player.setHealth(player.getHealth()-30);
+            player.setHealth(player.getHealth() - 30);
             sceneList.get(3).begin();
             System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
-            if(player.getHealth() <= 0) {
+            if (player.getHealth() <= 0) {
                 System.out.println("You died.");
                 break;
             }
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
-            switch(decision) {
+            switch (decision) {
                 case 1:
-                    if(player.hasGun()) {
+                    if (player.hasGun()) {
                         branchGunLoop();
-                    }
-                    else {
+                    } else {
                         player.setHealth(player.getHealth() - 10);
                         System.out.println("Punching the zombie in the face did not work. You lost 10 health.");
                         branchFightingLoop();
@@ -336,21 +328,20 @@ public class Battle extends Event{
     @Override
     public void end() {
         Console.clear();
-        if(zombie.getZHealth() <= 0 ) {
+        if (zombie.getZHealth() <= 0) {
             displayZombieDead();
             System.out.println("You killed the zombie. It's getting late and you need shelter. You go into a nearby forest");
             player.setAttack(player.getAttack() - 50);
         }
     }
 
-    private void displayZombieAngry () {
+    private void displayZombieAngry() {
         try {
             String path = "sceneArt/ZombieAngry.txt";
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -361,41 +352,40 @@ public class Battle extends Event{
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     private void displayZombieChase() {
         try {
             String path = "sceneArt/ZombieChase.txt";
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     private void displayZombieDead() {
         try {
             String path = "sceneArt/ZombieDead.txt";
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     private void displayExhausted() {
         try {
             String path = "sceneArt/Exhausted.txt";
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -406,8 +396,7 @@ public class Battle extends Event{
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -418,8 +407,7 @@ public class Battle extends Event{
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

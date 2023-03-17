@@ -11,6 +11,9 @@ public abstract class Event {
     protected Player player = null;
     protected List<Scene> sceneList = new ArrayList<>();
 
+    public static final String ANSI_RED = "\u001B[31m";     //console color for the health bar mainly
+    public static final String ANSI_RESET = "\u001B[0m";
+
     public Event (Player player) {
         this.player = player;
     }

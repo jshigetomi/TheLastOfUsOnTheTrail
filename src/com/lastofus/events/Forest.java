@@ -10,29 +10,24 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 
-public class Forest extends Event{
+public class Forest extends Event {                  //3 fields not including new battle instances between the switch cases
     private final Zombie zombie = new Zombie();
     private boolean quit = false;
     private int battleCounter = 0;
 
 
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_RESET = "\u001B[0m";
-
-
-
-    public Forest(Player currentPlayer) {
-        super(currentPlayer);
+    public Forest(Player currentPlayer) {       //my constructor only takes a player then reads through the scenes that are numbered
+        super(currentPlayer);                   //in the text file.
         this.player = currentPlayer;
         sceneList.add(new Scene("Forest", "1"));
         sceneList.add(new Scene("Forest", "2"));
-        sceneList.add(new Scene("Forest","3"));
-        sceneList.add(new Scene("Forest","4"));
+        sceneList.add(new Scene("Forest", "3"));
+        sceneList.add(new Scene("Forest", "4"));
         sceneList.add(new Scene("Forest", "5"));
     }
 
-    public void begin() {
-
+    public void begin() {           //begin method opens with a while loop like battle and highway. Since each loop is built around a text file
+        //full of scenes, that was the basis of my switch cases.
         while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
             /*
@@ -41,19 +36,19 @@ public class Forest extends Event{
             displayForest();
 
             sceneList.get(0).begin();
-            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
-            if(zombie.getZHealth() <= 0 ) {
+            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET); //color added here and other various game loops
+            if (zombie.getZHealth() <= 0) {
                 break;
             }
 
-            if(player.getHealth() <= 0) {
+            if (player.getHealth() <= 0) {
                 break;
             }
-            System.out.println("Choose wisely [1-4]");
+            System.out.println("Choose wisely [1-4]");      //first decision you come across (switch case below)
             int decision = appController.promptForDecision();
-            switch(decision) {
-                case 1:
-                    player.setHealth(player.getHealth() + 20);
+            switch (decision) {
+                case 1:                                     //player movers through the scenes by way of nextScene()
+                    player.setHealth(player.getHealth() + 20); //which is instantiated at the appController which uses the prompter.prompt()
                     System.out.println("Whew...A spot to rest for the night. You earned 20 health.");
                     appController.nextScene();
                     branchCampLoop();
@@ -62,12 +57,12 @@ public class Forest extends Event{
                     //build a trap
                     System.out.println("You caught a zombie. Time to kill it.");
                     appController.nextScene();
-                    trapLoop();
-                    player.setAttack(75); //FIX
+                    trapLoop();             //if you look under each case you find they intertwine with eachother. I will cover this more during lessons learned
+                    player.setAttack(75);
                     break;
                 case 3:
                     // keep running into the abyss
-                    Battle battle = new Battle(player);
+                    Battle battle = new Battle(player); //There are several "outs" in this level that will send Joe into a battle scenes or even back to the highway
                     battle.begin(); //keep running
                     break;
                 case 4:
@@ -80,7 +75,7 @@ public class Forest extends Event{
         }
     }
 
-//    private void branchHatchetLoop() {
+//    private void branchHatchetLoop() { A BATTLE INSTANCE INSIDE THE FOREST "IF" WE CREATED THE HATCHET
 //        if(player.hasHatchet() && !quit) {
 //            branchGunLoop();
 //        }
@@ -111,15 +106,15 @@ public class Forest extends Event{
 //        }
 //    }
 
-    private void trapLoop() {
+    private void trapLoop() {       //more looping done here in the trap loop...continue down
         while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
-            displayTrap();
+            displayTrap(); //everywhere you see display is where the art is getting read at the bottom of this class
             sceneList.get(4).begin();
             System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
-            switch(decision) {
+            switch (decision) {
                 case 1:
                     System.out.println("The zombie's head explodes and its body twitches");
                     System.out.println("Justice has been served!");
@@ -129,7 +124,7 @@ public class Forest extends Event{
                 case 2:
                     System.out.println("The zombie laughs");
                     System.out.println("Your hand is bleeding from the impact. You lost 10 health");
-                    player.setHealth(player.getHealth()-10);
+                    player.setHealth(player.getHealth() - 10);
                     appController.nextScene();
                     trapLoop();
                     break;
@@ -158,17 +153,16 @@ public class Forest extends Event{
             System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
-            switch(decision) {
+            switch (decision) {
                 case 1:
                     //investigate
-                    if(battleCounter == 0) {
+                    if (battleCounter == 0) {
                         battleCounter++;
                         player.setHealth(player.getHealth() - 10);
                         System.out.println("You have ran into a zombie");
                         Battle battle = new Battle(player);
                         battle.begin();
-                    }
-                    else {
+                    } else {
                         System.out.println("It's just a deer.");
                         appController.nextScene();
                     }
@@ -193,7 +187,7 @@ public class Forest extends Event{
     // Creeper branch S3
     private void branchCreeperLoop() {
         while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
-            if(battleCounter  > 0) {
+            if (battleCounter > 0) {
                 System.out.println("After the battle you head forward and see a light through the woods.");
                 appController.nextScene();
                 branchLightLoop();
@@ -207,7 +201,7 @@ public class Forest extends Event{
             System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
-            switch(decision) {
+            switch (decision) {
                 case 1:
                     //attack
                     battleCounter++;
@@ -244,12 +238,12 @@ public class Forest extends Event{
 
             sceneList.get(3).begin();
             System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
-            if(player.getHealth() <= 0) {
+            if (player.getHealth() <= 0) {
                 break;
             }
             System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
-            switch(decision) {
+            switch (decision) {
                 //go to the light
                 case 1:
                     Console.clear();
@@ -288,8 +282,7 @@ public class Forest extends Event{
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -300,8 +293,7 @@ public class Forest extends Event{
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -312,8 +304,7 @@ public class Forest extends Event{
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -324,8 +315,7 @@ public class Forest extends Event{
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -336,8 +326,7 @@ public class Forest extends Event{
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -348,8 +337,7 @@ public class Forest extends Event{
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -360,8 +348,7 @@ public class Forest extends Event{
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -372,8 +359,7 @@ public class Forest extends Event{
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

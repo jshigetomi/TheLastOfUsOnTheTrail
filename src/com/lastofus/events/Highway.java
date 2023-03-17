@@ -17,8 +17,6 @@ public class Highway extends Event {
     private int gunCounter = 0;
     private int kitCounter = 0;
 
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_RESET = "\u001B[0m";
 
     public Highway(Player player) {
         super(player);

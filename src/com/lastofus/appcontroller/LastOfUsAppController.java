@@ -24,7 +24,7 @@ public class LastOfUsAppController {
 
     public void execute() {
         String quit = "1";
-        while(!quit.equals("2")) {
+        while (!quit.equals("2")) {
             welcome(); //title screen
             nextScene();
             initializePlayer(); // initialize player
@@ -43,13 +43,11 @@ public class LastOfUsAppController {
 
     private void end() {
         Console.clear();
-        if(player1.hasFriend()) {
+        if (player1.hasFriend()) {
             twistEnd();
-        }
-        else if(player1.getHealth() == 0) {
+        } else if (player1.getHealth() == 0) {
             youDied();
-        }
-        else {
+        } else {
             theEnd();
         }
     }
@@ -79,10 +77,10 @@ public class LastOfUsAppController {
             Console.clear();
             System.out.println(player1.getBackpack().viewLoad());
             System.out.println(ANSI_RED + "Your current health is: " + player1.getHealth() + ANSI_RESET);
-            if(player1.hasGun()) {
+            if (player1.hasGun()) {
                 System.out.println("Gun Equipped.");
             }
-            if(player1.getBackpack().getLoad() == 0) {
+            if (player1.getBackpack().getLoad() == 0) {
                 nextScene();
                 break;
             }
@@ -96,8 +94,8 @@ public class LastOfUsAppController {
                         case 1:
                             Console.clear();
                             player1.getBackpack().getItems().get(0).menu(player1);
-                            decision = prompter.prompt("","1|2","");
-                            if(decision.equals("1")) {
+                            decision = prompter.prompt("", "1|2", "");
+                            if (decision.equals("1")) {
                                 player1.getBackpack().getItems().get(0).use(player1);
                                 player1.getBackpack().removeItem(0);
                             }
@@ -105,8 +103,8 @@ public class LastOfUsAppController {
                         case 2:
                             Console.clear();
                             player1.getBackpack().getItems().get(1).menu(player1);
-                            decision = prompter.prompt("","1|2","");
-                            if(decision.equals("1")) {
+                            decision = prompter.prompt("", "1|2", "");
+                            if (decision.equals("1")) {
                                 player1.getBackpack().getItems().get(1).use(player1);
                                 player1.getBackpack().removeItem(1);
                             }
@@ -114,8 +112,8 @@ public class LastOfUsAppController {
                         case 3:
                             Console.clear();
                             player1.getBackpack().getItems().get(2).menu(player1);
-                            decision = prompter.prompt("","1|2","");
-                            if(decision.equals("1")) {
+                            decision = prompter.prompt("", "1|2", "");
+                            if (decision.equals("1")) {
                                 player1.getBackpack().getItems().get(2).use(player1);
                                 player1.getBackpack().removeItem(2);
                             }
@@ -123,8 +121,8 @@ public class LastOfUsAppController {
                         case 4:
                             Console.clear();
                             player1.getBackpack().getItems().get(3).menu(player1);
-                            decision = prompter.prompt("","1|2","");
-                            if(decision.equals("1")) {
+                            decision = prompter.prompt("", "1|2", "");
+                            if (decision.equals("1")) {
                                 player1.getBackpack().getItems().get(3).use(player1);
                                 player1.getBackpack().removeItem(3);
                             }
@@ -132,8 +130,8 @@ public class LastOfUsAppController {
                         case 5:
                             Console.clear();
                             player1.getBackpack().getItems().get(4).menu(player1);
-                            decision = prompter.prompt("","1|2","");
-                            if(decision.equals("1")) {
+                            decision = prompter.prompt("", "1|2", "");
+                            if (decision.equals("1")) {
                                 player1.getBackpack().getItems().get(4).use(player1);
                                 player1.getBackpack().removeItem(4);
                             }
@@ -172,8 +170,7 @@ public class LastOfUsAppController {
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -192,8 +189,7 @@ public class LastOfUsAppController {
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -204,8 +200,7 @@ public class LastOfUsAppController {
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -216,8 +211,7 @@ public class LastOfUsAppController {
             // read the entire file as a string
             String contents = Files.readString(Path.of(path));
             System.out.println(contents);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
