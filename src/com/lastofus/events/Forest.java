@@ -10,14 +10,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 
-public class Forest extends Event {                  //3 fields not including new battle instances between the switch cases
+public class Forest extends Event {
     private final Zombie zombie = new Zombie();
     private boolean quit = false;
     private int battleCounter = 0;
 
 
-    public Forest(Player currentPlayer) {       //my constructor only takes a player then reads through the scenes that are numbered
-        super(currentPlayer);                   //in the text file.
+    public Forest(Player currentPlayer) {
+        super(currentPlayer);
         this.player = currentPlayer;
         sceneList.add(new Scene("Forest", "1"));
         sceneList.add(new Scene("Forest", "2"));
@@ -26,8 +26,7 @@ public class Forest extends Event {                  //3 fields not including ne
         sceneList.add(new Scene("Forest", "5"));
     }
 
-    public void begin() {           //begin method opens with a while loop like battle and highway. Since each loop is built around a text file
-        //full of scenes, that was the basis of my switch cases.
+    public void begin() {
         while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
             /*
@@ -36,7 +35,7 @@ public class Forest extends Event {                  //3 fields not including ne
             displayForest();
 
             sceneList.get(0).begin();
-            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET); //color added here and other various game loops
+            System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             if (zombie.getZHealth() <= 0) {
                 break;
             }
@@ -44,11 +43,11 @@ public class Forest extends Event {                  //3 fields not including ne
             if (player.getHealth() <= 0) {
                 break;
             }
-            System.out.println("Choose wisely [1-4]");      //first decision you come across (switch case below)
+            System.out.println("Choose wisely [1-4]");
             int decision = appController.promptForDecision();
             switch (decision) {
-                case 1:                                     //player movers through the scenes by way of nextScene()
-                    player.setHealth(player.getHealth() + 20); //which is instantiated at the appController which uses the prompter.prompt()
+                case 1:
+                    player.setHealth(player.getHealth() + 20);
                     System.out.println("Whew...A spot to rest for the night. You earned 20 health.");
                     appController.nextScene();
                     branchCampLoop();
@@ -57,12 +56,12 @@ public class Forest extends Event {                  //3 fields not including ne
                     //build a trap
                     System.out.println("You caught a zombie. Time to kill it.");
                     appController.nextScene();
-                    trapLoop();             //if you look under each case you find they intertwine with eachother. I will cover this more during lessons learned
+                    trapLoop();
                     player.setAttack(75);
                     break;
                 case 3:
                     // keep running into the abyss
-                    Battle battle = new Battle(player); //There are several "outs" in this level that will send Joe into a battle scenes or even back to the highway
+                    Battle battle = new Battle(player);
                     battle.begin(); //keep running
                     break;
                 case 4:
@@ -106,10 +105,10 @@ public class Forest extends Event {                  //3 fields not including ne
 //        }
 //    }
 
-    private void trapLoop() {       //more looping done here in the trap loop...continue down
+    private void trapLoop() {
         while (player.getHealth() > 0 && !sceneList.isEmpty() && !quit) {
             Console.clear();
-            displayTrap(); //everywhere you see display is where the art is getting read at the bottom of this class
+            displayTrap();
             sceneList.get(4).begin();
             System.out.println(ANSI_RED + "Your health: " + player.getHealth() + ANSI_RESET);
             System.out.println("Choose wisely [1-4]");
